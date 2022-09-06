@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author ADMIN
- */
 public class Descending {
      public Descending(Integer[] arrNeedSort)
     {
-        int arrNeedSortLength = arrNeedSort.length;
+        //Sort Descending
+        int arrNeedSortLength = arrNeedSort.length; 
         int swap;
         System.out.println("----- Descending -----");
         for(int i = 0; i < arrNeedSortLength; i++)
@@ -26,6 +18,8 @@ public class Descending {
                }
            }
         }
+        
+        // print
         String result = "";
         for(int i = 0; i < arrNeedSortLength; i++)
         {
