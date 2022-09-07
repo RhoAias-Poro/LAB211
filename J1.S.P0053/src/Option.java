@@ -1,9 +1,10 @@
-import java.util.*;
 
+import java.util.*;
+import ui.Menu;
 public class Option {
     public int getOption()
     {
-        Main function = new Main();
+        Menu function = new Menu();
         boolean isValid = false;
         Scanner sc = new Scanner(System.in);
         int option = 0;
