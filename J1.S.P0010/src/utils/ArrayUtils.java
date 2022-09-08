@@ -3,6 +3,8 @@ package utils;
 import java.util.Random;
 
 public class ArrayUtils {
+
+    //create a random array
     public static Integer[] createRandomArray(int range)
     {
         Integer[] randomArray = new Integer[range]; // create a array have length = range
@@ -14,6 +16,7 @@ public class ArrayUtils {
         return randomArray;
     }
 
+    //print the array
     public static void printArray(Integer[] Array, int range)
     {
         System.out.print("The array: [");
@@ -25,13 +28,14 @@ public class ArrayUtils {
         System.out.println("]");
     }
 
+    // make a clone of original array type int
     public static Integer[] cloneArray(Integer[] originalArray)
     {
-        Integer[] ret = new Integer[originalArray.length];
-        int index = 0;
+        Integer[] ret = new Integer[originalArray.length]; // create an array
+        int index = 0; // used to traverse all the original array
         for(int i = 0; i < originalArray.length; i++)
         {
-            ret[i] = originalArray[index++];
+            ret[i] = originalArray[index++]; // assign all the value of original array to the new array
         }
         return ret;
     }

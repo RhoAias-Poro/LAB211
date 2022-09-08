@@ -2,7 +2,9 @@ package utils;
 
 import java.util.Scanner;
 
-public class InputUtils {
+public class IntegerUtils {
+
+    //take input from user about length of the array
     public static int inputNumberOfArray()
     {
         int numberOfArray = 0; // create a variable for number of the array
@@ -24,6 +26,7 @@ public class InputUtils {
         return numberOfArray;
     }
 
+    // take user input about number that user want to find
     public static int inputSearchNumber()
     {
         int searchValue = 0; // create a variable for the number need to search

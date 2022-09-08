@@ -1,41 +1,40 @@
-package bo;/*
-*  bo.LinearSearch program have two function to perform searching a element in a random array
-*  Function inputNumber() take number of the array and each element number from the user
-*  Function searchNumber() create a random array base on arguments of inputNumber() pass into,
-*   display it and display the index of search number in array
+/*
+*  Linear Search class have 2 function is search() and displayResult()
+*  search() function is to search the index in the array
+*  displayResult() passing two argument to the ui.Display to print
 * */
 
-import java.util.Random;
-import java.util.Scanner;
+package bo;
+
 import utils.ArrayUtils;
 import ui.Display;
 public class LinearSearch {
     private Integer[] arr;
     private int length;
     private int searchValue;
-    public LinearSearch(Integer[] originalArray, int length, int searchValue)
+    public LinearSearch(Integer[] originalArray, int length, int searchValue) // Contructor
     {
         arr = originalArray;
         this.length = length;
         this.searchValue = searchValue;
     }
-    private int sort() {
-        ArrayUtils array = new ArrayUtils();
-        Integer[] clone = array.cloneArray(arr);
+    private int search() { // use linear search to found
         int result = 0; // store the index that searchValue equal to
-        for (int i = 0; i < length; i++) // create a for loop from 0 to length -1 to perform liner search
+        boolean numberFound = false; // check to see if the number have been found
+        for (int i = 0; i < length; i++) // create a for loop from 0 to length - 1 to perform liner search
         {
-            if (searchValue == clone[i]) {
+            if (searchValue == arr[i]) { //if value need to search match the value at the index i
                 result = i;
+                numberFound = true;
                 break;
             }
         }
+        if(numberFound == false) result = -1; // if the number not found then set the value of result to -1 ( meaning null)
         return result;
     }
 
     public void displayResult()
     {
-        int searchNumber = searchValue;
-        Display.displayInteger(sort(), searchNumber);
+        Display.displayInteger(search(), searchValue); // display the ui requirement
     }
 }
