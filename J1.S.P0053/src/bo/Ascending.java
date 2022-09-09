@@ -1,3 +1,4 @@
+package bo;
 
 public class Ascending{
     public Ascending(Integer[] arrNeedSort)
@@ -5,7 +6,7 @@ public class Ascending{
         // sort ascending
         int arrNeedSortLength = arrNeedSort.length;  
         int swap;
-        System.out.println("----- Ascending -----");
+        System.out.println("----- bo.Ascending -----");
         for(int i = 0; i < arrNeedSortLength; i++)
         {
            for(int j = 0; j < arrNeedSortLength - 1 - i; j++)

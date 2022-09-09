@@ -1,11 +1,12 @@
+package bo;
 
 public class Descending {
      public Descending(Integer[] arrNeedSort)
     {
-        //Sort Descending
+        //Sort bo.Descending
         int arrNeedSortLength = arrNeedSort.length; 
         int swap;
-        System.out.println("----- Descending -----");
+        System.out.println("----- bo.Descending -----");
         for(int i = 0; i < arrNeedSortLength; i++)
         {
            for(int j = 0; j < arrNeedSortLength - 1 - i; j++)
