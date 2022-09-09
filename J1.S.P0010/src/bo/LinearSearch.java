@@ -9,13 +9,13 @@ package bo;
 import utils.IntegerUtils;
 
 public class LinearSearch {
-    private Integer[] arr;
+    private int[] array;
     private int arrayLength;
     private int searchValue;
 
-    public LinearSearch(Integer[] originalArray, int arrayLength, int searchValue) // Contructor
+    public LinearSearch(int[] originalArray, int arrayLength, int searchValue) // Contructor
     {
-        arr = originalArray;
+        array = originalArray;
         this.arrayLength = arrayLength;
         this.searchValue = searchValue;
     }
@@ -25,7 +25,7 @@ public class LinearSearch {
         boolean numberFound = false; // check to see if the number have been found
         for (int i = 0; i < arrayLength; i++) // create a for loop from 0 to length - 1 to perform liner search
         {
-            if (searchValue == arr[i]) { //if value need to search match the value at the index i
+            if (searchValue == array[i]) { //if value need to search match the value at the index i
                 result = i;
                 numberFound = true;
                 break;

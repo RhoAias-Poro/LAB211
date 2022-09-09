@@ -1,9 +1,17 @@
 package bo;
 
 import ui.Display;
+import utils.ArrayUtils;
 
 public class BubbleSort {
-    private static Integer[] sort(Integer[] arrNeedSort, boolean isAsc) {
+    private int[] arrNeedSort;
+    private boolean isAsc;
+    public BubbleSort(int[] arrayNeedSort, boolean isAsc)
+    {
+        this.arrNeedSort = arrayNeedSort;
+        this.isAsc = isAsc;
+    }
+    private int[] sort() {
         int arrNeedSortLength = arrNeedSort.length;
         int swap;
         if (isAsc) {
@@ -35,8 +43,8 @@ public class BubbleSort {
         return arrNeedSort;
     }
 
-    public static void printResult(Integer[] arrayNeedSort, boolean isAsc)
+    public void printResult()
     {
-        Display.displayResult(sort(arrayNeedSort, isAsc));
+        ArrayUtils.printInOrderArray(sort(), isAsc);
     }
 }

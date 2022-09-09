@@ -6,9 +6,9 @@ import java.util.Scanner;
 public class ArrayUtils {
 
     //create a random array
-    public static Integer[] createRandomArray(int range)
+    public static int[] createRandomIntArray(int range)
     {
-        Integer[] randomArray = new Integer[range]; // create a array have length = range
+        int[] randomArray = new int[range]; // create a array have length = range
         Random rd = new Random(); // create Random Object
         for(int i = 0; i < range; i++) // create a for loop from 0 to range - 1 to create random array
         {
@@ -18,7 +18,7 @@ public class ArrayUtils {
     }
 
     //print the array
-    public static void printArray(Integer[] Array, int range)
+    public static void printIntArray(int[] Array, int range)
     {
         System.out.print("The array: [");
         for(int i = 0; i < range; i++) // create a for loop from 0 to range - 1 to print the array
@@ -30,9 +30,9 @@ public class ArrayUtils {
     }
 
     // make a clone of original array type int
-    public static Integer[] cloneArray(Integer[] originalArray)
+    public static int[] cloneIntArray(int[] originalArray)
     {
-        Integer[] ret = new Integer[originalArray.length]; // create an array
+        int[] ret = new int[originalArray.length]; // create an array
         int index = 0; // used to traverse all the original array
         for(int i = 0; i < originalArray.length; i++)
         {
@@ -41,9 +41,9 @@ public class ArrayUtils {
         return ret;
     }
 
-    public static Integer[] createArray(int arrLength) {
+    public static int[] createIntArray(int arrLength) {
         Scanner sc = new Scanner(System.in);
-        Integer[] arr = new Integer[arrLength];
+        int[] arr = new int[arrLength];
         for (int i = 0; i < arrLength; i++) {
             boolean isNumber = false;
             while (isNumber == false) {
@@ -57,5 +57,29 @@ public class ArrayUtils {
             }
         }
         return arr;
+    }
+
+    public static swapIntegerArray(Integer)
+
+    public static void printInOrderArray(int[] array, boolean isAsc)
+    {
+        int arrayLength = array.length;
+        if(isAsc)
+        {
+            System.out.println("----- Ascending -----");
+            for(int i = 0; i < arrayLength; i++)
+            {
+                System.out.println("[" + array[i] + "]");
+                if(i < arrayLength - 1) System.out.println("->");
+            }
+        }
+        else {
+            System.out.println("----- Ascending -----");
+            for(int i = arrayLength - 1; i >= 0; i--)
+            {
+                System.out.println("[" + array[i] + "]");
+                if(i > 0) System.out.println("<-");
+            }
+        }
     }
 }

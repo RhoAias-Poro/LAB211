@@ -68,7 +68,7 @@ public class IntegerUtils {
 
     public static void optionHandling(int option)
     {
-        Integer[] originalArray = {};
+        int[] originalArray = {};
         switch(option)
         {
             case 1:

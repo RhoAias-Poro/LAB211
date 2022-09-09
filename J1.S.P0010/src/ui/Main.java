@@ -19,7 +19,7 @@ public class Main {
         System.out.println("Enter search number:");
         int searchNumber = IntegerUtils.inputSearchNumber(); // input search number
 
-        Integer[] originalArray = array.createRandomArray(numberOfArray); // create random array
+        int[] originalArray = array.createRandomArray(numberOfArray); // create random array
         ArrayUtils.printArray(originalArray, numberOfArray); // print the array
 
         LinearSearch searchObject = new LinearSearch(originalArray, numberOfArray, searchNumber);
