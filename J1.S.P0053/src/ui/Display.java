@@ -1,6 +1,8 @@
 package ui;
 
 public class Display {
+
+    //display the ui
     public static void menu() {
         System.out.println("========= Bubble Sort program =========");
         System.out.println("1. Input Element");

@@ -40,16 +40,17 @@ public class IntegerUtils {
         return searchValue;
     }
 
+    // take user input about option that user want to choose
     public static int getOption() {
-        boolean isValid = false;
-        Scanner sc = new Scanner(System.in);
-        int option = 0;
+        boolean isValid = false; // check if that the user input is valid or not
+        Scanner sc = new Scanner(System.in);    // scan object
+        int option = 0; // initial a variable to store user input
         while (isValid == false) {
             try {
                 System.out.print("Please choice one option: ");
                 option = Integer.parseInt(sc.nextLine());
-                if (option < 1 || option > 4) throw new Exception();
-                isValid = true;
+                if (option < 1 || option > 4) throw new Exception(); // if user enter not in range option then throw Exception
+                isValid = true; // if none above have a problem then change = true to break the loop
             } catch (Exception e) {
                 System.out.println("Please enter an valid option");
             }
