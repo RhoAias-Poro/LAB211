@@ -1,14 +1,10 @@
 package ui;
 
-import java.lang.*;
-
-import utils.*;
+import controller.Option;
 
 public class Main {
-    
-    public static void main(String[] args)
-    {
-       Display.menu();
-       IntegerUtils.getOption();
+
+    public static void main(String[] args) {
+        Option.optionHandling();
     }
 }

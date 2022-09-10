@@ -5,7 +5,7 @@ import java.util.Random;
 public class ArrayUtils {
 
     //create a random array
-    public static int[] createRandomArray(int range) {
+    public static int[] createRandomIntArray(int range) {
         int[] randomArray = new int[range]; // create a array have length = range
         Random rd = new Random(); // create Random Object
         for (int i = 0; i < range; i++) // create a for loop from 0 to range - 1 to create random array
@@ -16,7 +16,7 @@ public class ArrayUtils {
     }
 
     //print the array
-    public static void printArray(int[] Array, int range) {
+    public static void printIntArray(int[] Array, int range) {
         System.out.print("The array: [");
         for (int i = 0; i < range; i++) // create a for loop from 0 to range - 1 to print the array
         {
@@ -27,7 +27,7 @@ public class ArrayUtils {
     }
 
     // make a clone of original array type int
-    public static int[] cloneArray(int[] originalArray) {
+    public static int[] cloneIntArray(int[] originalArray) {
         int[] ret = new int[originalArray.length]; // create an array
         int index = 0; // used to traverse all the original array
         for (int i = 0; i < originalArray.length; i++) {

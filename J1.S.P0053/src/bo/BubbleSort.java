@@ -1,50 +1,40 @@
 package bo;
 
-import ui.Display;
 import utils.ArrayUtils;
 
 public class BubbleSort {
-    private int[] arrNeedSort;
+    private int[] arrayNeedSort;
     private boolean isAsc;
-    public BubbleSort(int[] arrayNeedSort, boolean isAsc)
-    {
-        this.arrNeedSort = arrayNeedSort;
+
+    public BubbleSort(int[] arrayNeedSort, boolean isAsc) {
+        this.arrayNeedSort = arrayNeedSort;
         this.isAsc = isAsc;
     }
+
     private int[] sort() {
-        int arrNeedSortLength = arrNeedSort.length;
+        int arrNeedSortLength = arrayNeedSort.length;
         int swap;
         if (isAsc) {
-            System.out.println("----- bo.Ascending -----");
             for (int i = 0; i < arrNeedSortLength; i++) {
                 for (int j = 0; j < arrNeedSortLength - 1 - i; j++) {
-                    if (arrNeedSort[j] > arrNeedSort[j + 1]) {
-                        swap = arrNeedSort[j];
-                        arrNeedSort[j] = arrNeedSort[j + 1];
-                        arrNeedSort[j + 1] = swap;
+                    if (arrayNeedSort[j] > arrayNeedSort[j + 1]) {
+                        ArrayUtils.swap(arrayNeedSort, j, j + 1);
                     }
-
                 }
             }
-        }
-
-        else
-        {
+        } else {
             for (int i = 0; i < arrNeedSortLength; i++) {
                 for (int j = 0; j < arrNeedSortLength - 1 - i; j++) {
-                    if (arrNeedSort[j] < arrNeedSort[j + 1]) {
-                        swap = arrNeedSort[j];
-                        arrNeedSort[j] = arrNeedSort[j + 1];
-                        arrNeedSort[j + 1] = swap;
+                    if (arrayNeedSort[j] < arrayNeedSort[j + 1]) {
+                        ArrayUtils.swap(arrayNeedSort, j, j + 1);
                     }
                 }
             }
         }
-        return arrNeedSort;
+        return arrayNeedSort;
     }
 
-    public void printResult()
-    {
+    public void printResult() {
         ArrayUtils.printInOrderArray(sort(), isAsc);
     }
 }

@@ -6,11 +6,10 @@ import java.util.Scanner;
 public class ArrayUtils {
 
     //create a random array
-    public static int[] createRandomIntArray(int range)
-    {
+    public static int[] createRandomIntArray(int range) {
         int[] randomArray = new int[range]; // create a array have length = range
         Random rd = new Random(); // create Random Object
-        for(int i = 0; i < range; i++) // create a for loop from 0 to range - 1 to create random array
+        for (int i = 0; i < range; i++) // create a for loop from 0 to range - 1 to create random array
         {
             randomArray[i] = rd.nextInt(range); //tke a random number in number range and store it in array
         }
@@ -18,24 +17,21 @@ public class ArrayUtils {
     }
 
     //print the array
-    public static void printIntArray(int[] Array, int range)
-    {
+    public static void printIntArray(int[] Array, int range) {
         System.out.print("The array: [");
-        for(int i = 0; i < range; i++) // create a for loop from 0 to range - 1 to print the array
+        for (int i = 0; i < range; i++) // create a for loop from 0 to range - 1 to print the array
         {
             System.out.print(Array[i]); // print element in the array
-            if(i < range - 1) System.out.print(", ");
+            if (i < range - 1) System.out.print(", ");
         }
         System.out.println("]");
     }
 
     // make a clone of original array type int
-    public static int[] cloneIntArray(int[] originalArray)
-    {
+    public static int[] cloneIntArray(int[] originalArray) {
         int[] ret = new int[originalArray.length]; // create an array
         int index = 0; // used to traverse all the original array
-        for(int i = 0; i < originalArray.length; i++)
-        {
+        for (int i = 0; i < originalArray.length; i++) {
             ret[i] = originalArray[index++]; // assign all the value of original array to the new array
         }
         return ret;
@@ -59,27 +55,27 @@ public class ArrayUtils {
         return arr;
     }
 
-    public static swapIntegerArray(Integer)
+    public static void swap(int array[], int index1, int index2) {
+        int tmp = array[index1];
+        array[index1] = array[index2];
+        array[index2] = tmp;
+    }
 
-    public static void printInOrderArray(int[] array, boolean isAsc)
-    {
+    public static void printInOrderArray(int[] array, boolean isAsc) {
         int arrayLength = array.length;
-        if(isAsc)
-        {
+        if (isAsc) {
             System.out.println("----- Ascending -----");
-            for(int i = 0; i < arrayLength; i++)
-            {
-                System.out.println("[" + array[i] + "]");
-                if(i < arrayLength - 1) System.out.println("->");
+            for (int i = 0; i < arrayLength; i++) {
+                System.out.print("[" + array[i] + "]");
+                if (i < arrayLength - 1) System.out.print("->");
+            }
+        } else {
+            System.out.println("----- Descending -----");
+            for (int i = 0; i < arrayLength; i++) {
+                System.out.print("[" + array[i] + "]");
+                if (i < arrayLength-1) System.out.print("<-");
             }
         }
-        else {
-            System.out.println("----- Ascending -----");
-            for(int i = arrayLength - 1; i >= 0; i--)
-            {
-                System.out.println("[" + array[i] + "]");
-                if(i > 0) System.out.println("<-");
-            }
-        }
+        System.out.println();
     }
 }
