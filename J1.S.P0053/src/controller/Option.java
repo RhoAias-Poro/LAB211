@@ -1,3 +1,8 @@
+/*
+ *   Option class have optionHandling() function
+ *   that take user input then based on that to determine what to do
+ * */
+
 package controller;
 
 import bo.BubbleSort;
@@ -9,12 +14,16 @@ public class Option {
 
     //handling user input
     public static void optionHandling() {
-        int option; // initial a variable to store user input
+        boolean firstInput = true;
+        int option = 0; // initial a variable to store user input
         int[] originalArray = {}; // create an array to store user input
         BubbleSort sort; // BubbleSort sort object
         do {
             Display.menu(); // display the ui
-            option = IntegerUtils.getOption(); // get the option from the user then store it
+            if (firstInput == true) {
+                option = IntegerUtils.firstOption(true);
+                firstInput = false;
+            } else option = IntegerUtils.firstOption(false);
             switch (option) {
                 case 1:
                     //create an array based on the length of the array that user enter

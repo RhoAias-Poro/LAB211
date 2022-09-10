@@ -1,3 +1,7 @@
+/*
+* Display class have function menu() to print the UI that help user to decide the input to enter
+* */
+
 package ui;
 
 public class Display {

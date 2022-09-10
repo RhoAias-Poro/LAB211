@@ -1,3 +1,6 @@
+/*
+ *   Main class help exceute the code and print the array
+ * */
 package ui;
 
 import controller.Option;

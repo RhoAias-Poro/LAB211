@@ -49,10 +49,26 @@ public class IntegerUtils {
             try {
                 System.out.print("Please choice one option: ");
                 option = Integer.parseInt(sc.nextLine());
-                if (option < 1 || option > 4) throw new Exception(); // if user enter not in range option then throw Exception
+                if (option < 1 || option > 4)
+                    throw new Exception(); // if user enter not in range option then throw Exception
                 isValid = true; // if none above have a problem then change = true to break the loop
             } catch (Exception e) {
                 System.out.println("Please enter an valid option");
+            }
+        }
+        return option;
+    }
+
+    // if the first time input, user don't give any data then force them to
+    public static int firstOption(boolean firstTimeInput) {
+        int option = 0; // store the option from the user
+        if (firstTimeInput == false) option = IntegerUtils.getOption(); // get the option from the user then store it
+        else {
+            while (firstTimeInput == true) { // if this is the first time
+                option = IntegerUtils.getOption(); // get user input
+                if (option == 2 || option == 3) { // if user don't give any data then force them to do it
+                    System.out.println("Please enter an array first");
+                } else firstTimeInput = false; // after the first time then the second don't need to
             }
         }
         return option;

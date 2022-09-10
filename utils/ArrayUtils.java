@@ -37,16 +37,17 @@ public class ArrayUtils {
         return ret;
     }
 
+    // create an int array based on the length of the user enter
     public static int[] createIntArray(int arrLength) {
-        Scanner sc = new Scanner(System.in);
-        int[] arr = new int[arrLength];
-        for (int i = 0; i < arrLength; i++) {
-            boolean isNumber = false;
+        Scanner sc = new Scanner(System.in); // scan object
+        int[] arr = new int[arrLength]; // array
+        for (int i = 0; i < arrLength; i++) { // to enter user input
+            boolean isNumber = false; // to check if user enter a number or not
             while (isNumber == false) {
                 System.out.print("Enter Number " + (i + 1) + ": ");
                 try {
-                    arr[i] = Integer.parseInt(sc.nextLine());
-                    isNumber = true;
+                    arr[i] = Integer.parseInt(sc.nextLine()); // if not then catch that exception then reset the loop
+                    isNumber = true; // break the loop
                 } catch (Exception e) {
                     System.out.println("Please input a number");
                 }
@@ -55,12 +56,14 @@ public class ArrayUtils {
         return arr;
     }
 
-    public static void swap(int array[], int index1, int index2) {
+    // swaping two integer from an array
+    public static void swapFromAnArray(int array[], int index1, int index2) {
         int tmp = array[index1];
         array[index1] = array[index2];
         array[index2] = tmp;
     }
 
+    // print a function in Asending or Descending order
     public static void printInOrderArray(int[] array, boolean isAsc) {
         int arrayLength = array.length;
         if (isAsc) {

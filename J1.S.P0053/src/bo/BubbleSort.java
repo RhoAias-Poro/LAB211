@@ -1,10 +1,16 @@
+/*
+ *   BubbleSort class have to function
+ *   the function sort() sort the array that user enter then return it in ascending or descending way
+ *   the function printResult() print the array
+ * */
+
 package bo;
 
 import utils.ArrayUtils;
 
 public class BubbleSort {
-    private int[] arrayNeedSort;
-    private boolean isAsc;
+    private int[] arrayNeedSort; // initial an array to store the array that user enter
+    private boolean isAsc; // determine to sort Ascending or Descending
 
     //constructor
     public BubbleSort(int[] arrayNeedSort, boolean isAsc) {
@@ -14,7 +20,7 @@ public class BubbleSort {
 
     // sorting function
     private int[] sort() {
-        int arrNeedSortLength = arrayNeedSort.length;
+        int arrNeedSortLength = arrayNeedSort.length; // length of the array
 
         // Ascending sort
         if (isAsc) {
