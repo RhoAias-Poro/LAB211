@@ -7,9 +7,9 @@ import utils.IntegerUtils;
 
 public class Main {
     public static void main(String[] args) {
-        int arrayLength = IntegerUtils.inputNumberOfArray();
-        int[] arrayNeedSort = ArrayUtils.createRandomIntArray(arrayLength);
-        SelectionSort sort = new SelectionSort(arrayNeedSort, arrayLength);
-        sort.displayResult();
+        int arrayLength = IntegerUtils.inputNumberOfArray(); // take length of the array from user input
+        int[] arrayNeedSort = ArrayUtils.createRandomIntArray(arrayLength); //create random array based on the length of the array
+        SelectionSort sort = new SelectionSort(arrayNeedSort, arrayLength);// SelectionSort obj
+        sort.displayResult();// display the result after sort
     }
 }
