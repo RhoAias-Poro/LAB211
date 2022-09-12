@@ -38,9 +38,13 @@ public class IntegerUtils {
         return searchValue;
     }
 
-    public static void printFoundIndex(int result, int searchNumber) {
-        int EMPTY = -1; // if index == -1 then it is null
-        if (result != EMPTY) System.out.println("Found " + searchNumber + " at index: " + result);
-        else System.out.println("Can't found " + searchNumber + " in the array");
+    public static int linearSearch(int[] array, int searchValue) { // use linear search to found
+        for (int i = 0; i < array.length; i++) // create a for loop from 0 to length - 1 to perform liner search
+        {
+            if (searchValue == array[i]) { //if value need to search match the value at the index i
+                return i;
+            }
+        }
+        return -1;
     }
 }

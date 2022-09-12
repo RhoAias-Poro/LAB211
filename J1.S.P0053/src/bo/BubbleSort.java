@@ -19,24 +19,14 @@ public class BubbleSort {
     }
 
     // sorting function
-    private int[] sort() {
-        int arrNeedSortLength = arrayNeedSort.length; // length of the array
-
-        // Ascending sort
-        if (isAsc) {
-            for (int i = 0; i < arrNeedSortLength; i++) {
-                for (int j = 0; j < arrNeedSortLength - 1 - i; j++) {
+    public int[] sort() {
+        for (int i = 0; i < arrayNeedSort.length; i++) {
+            for (int j = 0; j < arrayNeedSort.length - 1 - i; j++) {
+                if (isAsc) {
                     if (arrayNeedSort[j] > arrayNeedSort[j + 1]) {
                         ArrayUtils.swapFromAnArray(arrayNeedSort, j, j + 1);
                     }
-                }
-            }
-        }
-
-        // Descending sort
-        else {
-            for (int i = 0; i < arrNeedSortLength; i++) {
-                for (int j = 0; j < arrNeedSortLength - 1 - i; j++) {
+                } else {
                     if (arrayNeedSort[j] < arrayNeedSort[j + 1]) {
                         ArrayUtils.swapFromAnArray(arrayNeedSort, j, j + 1);
                     }
@@ -44,10 +34,5 @@ public class BubbleSort {
             }
         }
         return arrayNeedSort;
-    }
-
-    // print the result
-    public void printResult() {
-        ArrayUtils.printInOrderArray(sort(), isAsc);
     }
 }
