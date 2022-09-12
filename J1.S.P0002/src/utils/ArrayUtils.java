@@ -62,23 +62,4 @@ public class ArrayUtils {
         array[index1] = array[index2];
         array[index2] = tmp;
     }
-
-    // print a function in Asending or Descending order
-    public static void printInOrderArray(int[] array, boolean isAsc) {
-        int arrayLength = array.length;
-        if (isAsc) {
-            System.out.println("----- Ascending -----");
-            for (int i = 0; i < arrayLength; i++) {
-                System.out.print("[" + array[i] + "]");
-                if (i < arrayLength - 1) System.out.print("->");
-            }
-        } else {
-            System.out.println("----- Descending -----");
-            for (int i = 0; i < arrayLength; i++) {
-                System.out.print("[" + array[i] + "]");
-                if (i < arrayLength-1) System.out.print("<-");
-            }
-        }
-        System.out.println();
-    }
 }
