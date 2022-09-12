@@ -6,9 +6,9 @@ import utils.IntegerUtils;
 
 public class Main {
     public static void main(String[] args) {
-        int arrayLength = IntegerUtils.inputNumberOfArray();
-        int[] arrayNeedSort = ArrayUtils.createRandomIntArray(arrayLength);
-        BubbleSort sort = new BubbleSort(arrayNeedSort, arrayLength);
-        sort.displayResult();
+        int arrayLength = IntegerUtils.inputNumberOfArray(); // get length of the array from user input
+        int[] arrayNeedSort = ArrayUtils.createRandomIntArray(arrayLength); // create random that have limit in the length
+        BubbleSort sort = new BubbleSort(arrayNeedSort, arrayLength); //BubbleSort obj
+        sort.displayResult(); // display the result
     }
 }
