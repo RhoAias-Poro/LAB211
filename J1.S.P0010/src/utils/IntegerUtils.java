@@ -37,14 +37,4 @@ public class IntegerUtils {
         }
         return searchValue;
     }
-
-    public static int linearSearch(int[] array, int searchValue) { // use linear search to found
-        for (int i = 0; i < array.length; i++) // create a for loop from 0 to length - 1 to perform liner search
-        {
-            if (searchValue == array[i]) { //if value need to search match the value at the index i
-                return i;
-            }
-        }
-        return -1;
-    }
 }

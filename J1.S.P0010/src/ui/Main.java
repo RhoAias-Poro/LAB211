@@ -4,6 +4,7 @@
 
 package ui;
 
+import bo.LinearSearch;
 import utils.ArrayUtils;
 import utils.IntegerUtils;
 
@@ -21,8 +22,9 @@ public class Main {
         int[] array = randArray.createRandomIntArray(numberOfArray); // create random array
         ArrayUtils.printIntArray(array, numberOfArray); // print the array
 
-        int index = IntegerUtils.linearSearch(array, searchNumber);
-        if(index == -1) System.out.println("Not Found");
-        else System.out.println("Found " + searchNumber + " at index: " + index);
+        LinearSearch obj = new LinearSearch(array);
+        int result = obj.getSorted(searchNumber);
+        if(result == -1) System.out.println("Not Found");
+        else System.out.println("Found " + searchNumber + " at index: " + result);
     }
 }
