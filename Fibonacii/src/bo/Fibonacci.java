@@ -5,13 +5,14 @@ import java.util.ArrayList;
 
 public class Fibonacci {
 
-    private static ArrayList<BigInteger> array = new ArrayList<BigInteger>();
+    private static ArrayList<BigInteger> array;
 
     private int length;
 
     public Fibonacci(int length)
     {
         this.length = length;
+        array = new ArrayList<BigInteger>(length);
         array.add(BigInteger.ZERO);
         array.add(BigInteger.ONE);
     }
