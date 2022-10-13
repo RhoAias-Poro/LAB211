@@ -91,6 +91,7 @@ public class StudentManagerController {
                 countCpp += 1;
             }
             for (int j = i + 1; j < list.size(); j++) {
+                // same id but different semester
                 if (list.get(i).getId().equalsIgnoreCase(list.get(j).getId()) && !list.get(i).getSemester().equalsIgnoreCase(list.get(j).getSemester())) {
                     ArrayList<Student.courseName> listCourse2 = list.get(j).getCourseName();
                     if (listCourse2.contains(Student.courseName.getTypeByInt(1))) {
