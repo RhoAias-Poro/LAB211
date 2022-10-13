@@ -76,8 +76,8 @@ public class StudentManagerController {
 
     public void report() {
         ArrayList<Student> list = studentManager.getStudentList();
-        for (int i = 0; i < list.size(); i++) {
-            ArrayList<Student.courseName> listCourse1 = list.get(i).getCourseName();
+        while (list.size() > 0) {
+            ArrayList<Student.courseName> listCourse1 = list.get(0).getCourseName();
             int countJava = 0;
             int countNet = 0;
             int countCpp = 0;
@@ -90,9 +90,9 @@ public class StudentManagerController {
             if (listCourse1.contains(Student.courseName.getTypeByInt(3))) {
                 countCpp += 1;
             }
-            for (int j = i + 1; j < list.size(); j++) {
+            for (int j = 1; j < list.size(); j++) {
                 // same id but different semester
-                if (list.get(i).getId().equalsIgnoreCase(list.get(j).getId()) && !list.get(i).getSemester().equalsIgnoreCase(list.get(j).getSemester())) {
+                if (list.get(0).getId().equalsIgnoreCase(list.get(j).getId()) && !list.get(0).getSemester().equalsIgnoreCase(list.get(j).getSemester())) {
                     ArrayList<Student.courseName> listCourse2 = list.get(j).getCourseName();
                     if (listCourse2.contains(Student.courseName.getTypeByInt(1))) {
                         countJava += 1;
@@ -106,10 +106,10 @@ public class StudentManagerController {
                 }
                 list.remove(list.get(j));
             }
-            System.out.println(list.get(i).getStudentName() + " | " + "Java" + "  | " + countJava);
-            System.out.println(list.get(i).getStudentName() + " | " + "Net" + "   | " + countNet);
-            System.out.println(list.get(i).getStudentName() + " | " + "Cpp" + "   | " + countCpp);
-            list.remove(list.get(i));
+            System.out.println(list.get(0).getStudentName() + " | " + "Java" + "  | " + countJava);
+            System.out.println(list.get(0).getStudentName() + " | " + "Net" + "   | " + countNet);
+            System.out.println(list.get(0).getStudentName() + " | " + "Cpp" + "   | " + countCpp);
+            list.remove(list.get(0));
         }
     }
 }
