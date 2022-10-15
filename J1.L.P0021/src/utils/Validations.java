@@ -10,7 +10,7 @@ import java.util.Scanner;
 /**
  * @author khang
  */
-public class ValidationAndNormalizingTextUtil {
+public class Validations {
 
     public static String removeUnnecessaryBlank(String input) {
         return input.trim().replaceAll("\\s+", " ");
