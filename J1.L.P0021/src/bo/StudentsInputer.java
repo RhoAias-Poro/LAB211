@@ -9,7 +9,7 @@ public class StudentsInputer {
 
     public void inputInformation(Student s) {
         s.setId(Validations.getStringByRegex("Enter Student ID: ", "Please enter valid character", "[a-zA-Z0-9]+"));
-        s.setStudentName(Validations.getStringByRegex("Enter Name: ", "Please enter character only!", "[A-Za-z ]+"));
+        s.setStudentName(Validations.getStringByRegex("Enter Name: ", "Please enter character only!", "[A-Za-z\s]+"));
         s.setSemester(Validations.getNonEmptyString("Enter Semester Name: "));
         while (true) {
             int courseID = Validations.getInt(courseInfo + "Enter Course ID: ", "Please enter number only", "Please enter courseID on the screen only", 1, 3);
