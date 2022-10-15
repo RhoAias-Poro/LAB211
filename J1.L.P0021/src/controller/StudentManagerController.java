@@ -21,7 +21,7 @@ public class StudentManagerController {
         student = new Student();
         studentsInputer.inputInformation(student);
         try {
-            Student isFound = studentManager.getStudentById(student.getId());
+            Student isFound = studentManager.getStudentById(student.getId()); // throw exception if not found
             if (isFound.getStudentName().equalsIgnoreCase(student.getStudentName()) && !isFound.getSemester().equalsIgnoreCase(student.getSemester())) {
                 studentManager.addStudent(student);
                 System.out.print("\nAdd a student Complete\n");
@@ -55,7 +55,7 @@ public class StudentManagerController {
         String ret = "";
         for (Student s : foundList) {
             for (int i = 0; i < s.getCourseName().size(); i++) {
-                ret += s.getId() + " " + s.getStudentName() + " " + s.getSemester() + " " + s.getCourseName().get(i) + "\n";
+                ret += s.getId() + " | " + s.getStudentName() + " | " + s.getSemester() + " | " + s.getCourseName().get(i) + "\n";
             }
         }
         return ret;
