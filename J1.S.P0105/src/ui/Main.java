@@ -1,0 +1,60 @@
+package ui;
+
+import controller.ProductManagerController;
+import entity.Product;
+import entity.StoreKeeper;
+import util.IntegerUtils;
+import util.Validations;
+
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String menu = "Welcome to the product management system\n" +
+                "1. Add StoreKeeper\n" +
+                "2. Add Product\n" +
+                "3. Update Product\n" +
+                "4. Search Product\n" +
+                "5. Sort Product by Expiry date, Date of manufacturer";
+        String searchByChoice = "Element you want to search from\n" +
+                "1. Name\n" +
+                "2. Category\n" +
+                "3. StoreKeeper\n" +
+                "4. ReceiptDate\n" +
+                "Please enter: ";
+        int choice = 0, id = 0, searchChoice = 0;
+        ProductManagerController controller = new ProductManagerController();
+        Product product = new Product();
+        StoreKeeper storeKeeper = new StoreKeeper();
+        ArrayList<Product> ret;
+        do {
+            System.out.println(menu);
+            choice = IntegerUtils.getOption();
+            switch (choice) {
+                case 1:
+                    storeKeeper = controller.addStoreKeeper();
+                    System.out.println("Add complete");
+                    break;
+                case 2:
+                    product = controller.addProduct();
+                    System.out.println("Add complete");
+                    break;
+                case 3:
+                    id = Validations.getInt("Please enter a id of a product", "Please enter number only", "Please enter positive number", 0, Integer.MAX_VALUE);
+                    try {
+                        controller.updateProduct(id);
+                    } catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
+                    break;
+                case 4:
+                    searchChoice = Validations.getInt(searchByChoice, "Please enter number only", "Please enter number on the menu", 1, 4);
+                    ret = controller.searchByChoice(searchChoice);
+                    for (Product p : ret) {
+                        System.out.println(p.getId() + " | " + p.getName() + " | " + p.getLocation() + " | " + p.getPrice() + " | " + p.getExpireDate() + " | " + p.getProduceDate() + " | " + p.getCategory() + " | " + p.getStoreKeeper().getName() + " | " + p.getReceiptDate());
+                    }
+                    break;
+            }
+        } while (choice != 6);
+    }
+}

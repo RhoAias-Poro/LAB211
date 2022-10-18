@@ -1,35 +1,29 @@
 package bo;
 
-import entity.BaseType.baseType;
-import utils.utils.IntegerUtils;
-import utils.utils.Validations;
+import entity.BaseType.Base;
 
 public class BaseInputer {
 
-    private baseType type;
+    private Base type;
 
-    public String inputNumberByBase(baseType type) {
-        String regex = checkType(type);
-        return Validations.getStringByRegex("Please enter value that you want to convert: ", "Please enter value that satisfy the base you choose", regex);
-    }
-
-    public baseType inputNumberAndCovertBase() {
-        int input = IntegerUtils.inputBase();
+    public Base inputNumberAndCovertBase(int input) throws Exception {
         switch (input) {
             case 1:
-                type = baseType.BIN;
+                type = Base.BIN;
                 break;
             case 2:
-                type = baseType.DEC;
+                type = Base.DEC;
                 break;
             case 3:
-                type = baseType.HEX;
+                type = Base.HEX;
                 break;
+            default:
+                throw new Exception("Please enter in the menu");
         }
         return type;
     }
 
-    public String checkType(baseType type) {
+    public String checkType(Base type) throws Exception {
         String regex = "";
         switch (type) {
             case BIN:
@@ -41,6 +35,8 @@ public class BaseInputer {
             case HEX:
                 regex = "[0-9a-fA-F]+";
                 break;
+            default:
+                throw new Exception("Invalid base type");
         }
         return regex;
     }

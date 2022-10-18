@@ -29,7 +29,7 @@ public class IntegerUtils {
         int inputValue = 0; // create a variable for the number need to search
         boolean isNumber = false; // create to loop for try-catch number need to search
         Scanner sc = new Scanner(System.in); // Create scan object that take user input
-        while (isNumber == false) {
+        while (!isNumber) {
             System.out.print("Please Enter Base: ");
             try {
                 inputValue = Integer.parseInt(sc.nextLine());
@@ -50,7 +50,7 @@ public class IntegerUtils {
         boolean isValid = false; // check if that the user input is valid or not
         Scanner sc = new Scanner(System.in);    // scan object
         int option = 0; // initial a variable to store user input
-        while (isValid == false) {
+        while (!isValid) {
             try {
                 System.out.print("Please choice one option: ");
                 option = Integer.parseInt(sc.nextLine());

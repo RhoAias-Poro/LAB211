@@ -12,7 +12,8 @@ public class StudentManager implements Comparator<Student> {
         listStudent = new ArrayList<Student>();
     }
 
-    public Student addStudent(Student s) {
+    public Student addStudent(Student s) throws Exception {
+        if (s == null) throw new Exception("Student cannot be null");
         listStudent.add(s);
         return s;
     }
@@ -21,7 +22,7 @@ public class StudentManager implements Comparator<Student> {
         return listStudent;
     }
 
-    private int searchById(String id) throws Exception {
+    private int searchById(String id) {
         int index = 0;
         for (Student student : listStudent) {
             if (student.getId().equalsIgnoreCase(id)) {
@@ -33,6 +34,7 @@ public class StudentManager implements Comparator<Student> {
     }
 
     public Student updateStudent(String id, Student s) throws Exception {
+        if (s == null) throw new Exception("Student cannot be null");
         int index = searchById(id);
         if (index != -1) return listStudent.set(index, s);
         throw new Exception("Student not found");
@@ -75,5 +77,14 @@ public class StudentManager implements Comparator<Student> {
     @Override
     public int compare(Student o1, Student o2) {
         return 0;
+    }
+
+    public String toString(Student s) {
+        if(s == null) return "null";
+        String ret = "";
+        for (int i = 0; i < s.getCourseName().size(); i++) {
+            ret += s.getId() + " | " + s.getStudentName() + " | " + s.getSemester() + " | " + s.getCourseName().get(i) + "\n";
+        }
+        return ret;
     }
 }

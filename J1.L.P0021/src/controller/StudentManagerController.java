@@ -3,7 +3,6 @@ package controller;
 import bo.StudentManager;
 import bo.StudentsInputer;
 import entity.Student;
-import utils.Validations;
 
 import java.util.ArrayList;
 
@@ -17,53 +16,37 @@ public class StudentManagerController {
         studentsInputer = new StudentsInputer();
     }
 
-    private void addStudent() throws Exception {
-        student = new Student();
-        studentsInputer.inputInformation(student);
+    public Student addStudent() throws Exception {
+        student = studentsInputer.inputInformation();
         try {
             Student isFound = studentManager.getStudentById(student.getId()); // throw exception if not found
             if (isFound.getStudentName().equalsIgnoreCase(student.getStudentName()) && !isFound.getSemester().equalsIgnoreCase(student.getSemester())) {
-                studentManager.addStudent(student);
-                System.out.print("\nAdd a student Complete\n");
+                throw new Exception();
             } else {
-                System.out.println("Invalid Student Information");
-                addStudent();
+                throw new Exception("Invalid Student Information");
             }
         } catch (Exception e) {
-            studentManager.addStudent(student);
-            System.out.print("\nAdd a student Complete\n");
-        }
-    }
-
-    public void numberStudentAdd() throws Exception {
-        int i = 0;
-        while (true) {
-            if (i < 2) {
-                addStudent();
-                i++;
-            } else {
-                String input = Validations.pressYNtoContinue("Do you want to continue(Y/N): ");
-                if (input.toLowerCase().equals("y")) {
-                    addStudent();
-                } else break;
+            if (e.getMessage().equalsIgnoreCase("Invalid Student Information")) System.err.println(e.getMessage());
+            else {
+                studentManager.addStudent(student);
+                System.out.println("Add student complete");
             }
         }
+        return student;
     }
 
     public String findAndSort(String input) {
         ArrayList<Student> foundList = studentManager.findAndSort(input);
         String ret = "";
         for (Student s : foundList) {
-            for (int i = 0; i < s.getCourseName().size(); i++) {
-                ret += s.getId() + " | " + s.getStudentName() + " | " + s.getSemester() + " | " + s.getCourseName().get(i) + "\n";
-            }
+            ret += studentManager.toString(s);
         }
         return ret;
     }
 
     public Student updateStudent(String id) throws Exception {
         student = studentManager.getStudentById(id);
-        studentsInputer.inputInformation(student);
+        student = studentsInputer.inputInformation();
         return studentManager.updateStudent(id, student);
     }
 
@@ -104,9 +87,7 @@ public class StudentManagerController {
                 }
                 list.remove(list.get(j));
             }
-            ret = list.get(0).getStudentName() + " | " + "Java" + "  | " + countJava + "\n" +
-                    list.get(0).getStudentName() + " | " + "Net" + "   | " + countNet + "\n" +
-                    list.get(0).getStudentName() + " | " + "Cpp" + "   | " + countCpp + "\n";
+            ret = list.get(0).getStudentName() + " | " + "Java" + "  | " + countJava + "\n" + list.get(0).getStudentName() + " | " + "Net" + "   | " + countNet + "\n" + list.get(0).getStudentName() + " | " + "Cpp" + "   | " + countCpp + "\n";
             list.remove(list.get(0));
         }
         return ret;

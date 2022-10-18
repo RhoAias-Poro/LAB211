@@ -1,28 +1,27 @@
 package bo;
 
-import entity.BaseType.baseType;
+import entity.BaseType.Base;
 
 import java.math.BigInteger;
 
 
 public class BaseConvert {
-    private static String BIT_STRING = "0123456789ABCDEF";
+    private static String ValidateString = "0123456789ABCDEF";
     private BaseInputer baseInputer = new BaseInputer();
 
-    private BigInteger baseToDec(String input, baseType base) {
+    private BigInteger baseToDec(String input, Base base) {
         BigInteger ret = BigInteger.ZERO;
-        long buffer = 0;
         for (int i = 0; i < input.length(); i++) {
-            ret = ret.add(BigInteger.valueOf((long) (BIT_STRING.indexOf(input.charAt(i)) * Math.pow(base.getIntbyType(), input.length() - i - 1))));
+            ret = ret.add(BigInteger.valueOf((long) (ValidateString.indexOf(input.charAt(i)) * Math.pow(base.getIntbyType(), input.length() - i - 1))));
         }
         return ret;
     }
 
-    private String decToBase(BigInteger input, baseType base) {
+    private String decToBase(BigInteger input, Base base) {
         BigInteger baseBig = new BigInteger(String.valueOf(base.getIntbyType()));
         String ret = "";
         while (input.compareTo(BigInteger.ZERO) > 0) {
-            ret += BIT_STRING.charAt(input.remainder(baseBig).intValue());
+            ret += ValidateString.charAt(input.remainder(baseBig).intValue());
             input = input.divide(baseBig);
         }
         StringBuilder sb = new StringBuilder(ret);
@@ -53,12 +52,14 @@ public class BaseConvert {
 //        return decToBase(baseToDec(numString, baseType.HEX), baseType.DEC);
 //    }
 
-    public String convertToOutput(String numString, baseType originalType, baseType convertType) {
+    public String convertToOutput(String numString, Base originalType, Base convertType) throws Exception {
         if (originalType.equals(convertType)) {
-            return numString.replaceAll("^0+", "");
+            numString = numString.replaceAll("^0+", "");
+            if (numString.isEmpty()) return "0";
+            return numString;
         }
         if (!numString.matches(baseInputer.checkType(originalType)))
-            return "Please enter a valid number of the base type";
+            throw new Exception("Please enter a valid number of the base type");
         return decToBase(baseToDec(numString.toUpperCase(), originalType), convertType);
     }
 }

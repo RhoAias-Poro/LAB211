@@ -22,7 +22,14 @@ public class Main {
             choice = IntegerUtils.getOption();
             switch (choice) {
                 case 1:
-                    controller.addEmployee();
+                    while (true) {
+                        try {
+                            employee = controller.addEmployee();
+                            break;
+                        } catch (Exception e) {
+                            System.err.println(e.getMessage());
+                        }
+                    }
                     System.out.println("Add employee complete");
                     break;
                 case 2:
@@ -31,7 +38,7 @@ public class Main {
                         employee = controller.updateEmployee(id);
                         System.out.println("Update employee complete");
                     } catch (Exception e) {
-                        System.out.println(e.getMessage());
+                        System.err.println(e.getMessage());
                     }
                     break;
                 case 3:
@@ -40,7 +47,7 @@ public class Main {
                         employee = controller.deleteEmployee(id);
                         System.out.println("Delete employee complete");
                     } catch (Exception e) {
-                        System.out.println(e.getMessage());
+                        System.err.println(e.getMessage());
                     }
                     break;
                 case 4:

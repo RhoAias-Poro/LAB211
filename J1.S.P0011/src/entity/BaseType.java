@@ -2,21 +2,21 @@ package entity;
 
 public class BaseType {
 
-    private baseType t;
+    private Base t;
 
     public BaseType() {
 
     }
 
-    public baseType getBaseType() {
+    public Base getBaseType() {
         return t;
     }
 
-    public void setBaseType(baseType t) {
+    public void setBaseType(Base t) {
         this.t = t;
     }
 
-    public enum baseType {
+    public enum Base {
         BIN, DEC, HEX;
 
         public int getIntbyType() {

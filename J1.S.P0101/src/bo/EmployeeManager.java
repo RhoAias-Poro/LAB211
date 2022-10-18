@@ -11,12 +11,14 @@ public class EmployeeManager {
         listEmployees = new ArrayList<Employee>();
     }
 
-    public Employee addEmployee(Employee employee) {
+    public Employee addEmployee(Employee employee) throws Exception {
+        if(employee == null) throw new Exception("Employee cannot be null");
         listEmployees.add(employee);
         return employee;
     }
 
-    public int searchById(int id) {
+    public int searchById(int id) throws Exception {
+        if(id < 0) throw new Exception("ID cannot be negative");
         int index = 0;
         for (Employee employee : listEmployees) {
             if (employee.getId() == id) {
@@ -28,6 +30,7 @@ public class EmployeeManager {
     }
 
     public Employee updateEmployee(int id, Employee s) throws Exception {
+        if(s == null) throw new Exception("Employee cannot be null");
         int index = searchById(id);
         if (index != -1) return listEmployees.set(index, s);
         throw new Exception("Employee not found");
@@ -61,5 +64,9 @@ public class EmployeeManager {
     public ArrayList<Employee> returnEmployeeList()
     {
         return listEmployees;
+    }
+
+    public String toString(Employee emp){
+        return (emp.getId() + " | " + emp.getFirstName() + " | " + emp.getLastName() + " | " + emp.getPhone() + " | " + emp.getEmail() + " | " + emp.getAddress() + " | " + emp.getDob() + " | " + emp.getSex() + " | " + emp.getSalary() + " | " + emp.getAgency() + "\n");
     }
 }

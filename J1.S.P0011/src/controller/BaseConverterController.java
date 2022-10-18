@@ -2,11 +2,12 @@ package controller;
 
 import bo.BaseConvert;
 import bo.BaseInputer;
-import entity.BaseType.baseType;
+import entity.BaseType.Base;
 
 public class BaseConverterController {
 
-    private baseType originalType;
+    private Base originalType;
+    private Base convertType;
     private BaseInputer input;
     private BaseConvert convert;
 
@@ -15,10 +16,9 @@ public class BaseConverterController {
         convert = new BaseConvert();
     }
 
-    public String inputNumberAndBase(baseType convertType) {
-        String originalNumber = "";
-        originalType = input.inputNumberAndCovertBase();
-        originalNumber = input.inputNumberByBase(originalType);
+    public String inputNumberAndBase(int originalChoice, int convertChoice, String originalNumber) throws Exception {
+        originalType = input.inputNumberAndCovertBase(originalChoice);
+        convertType = input.inputNumberAndCovertBase(convertChoice);
         return convert.convertToOutput(originalNumber, originalType, convertType);
     }
 }

@@ -5,7 +5,8 @@ import util.Validations;
 
 public class EmployeeInputer {
 
-    public void employeeInformationInput(Employee e) {
+    public Employee employeeInformationInput() {
+        Employee e = new Employee();
         e.setId(Validations.getInt("Enter employee ID: ", "Please enter number only", "Please enter positive number", 0, Integer.MAX_VALUE));
         e.setFirstName((Validations.getStringByRegex("Enter employee first name: ", "Please enter character only", "[a-zA-Z\s]+")));
         e.setLastName((Validations.getStringByRegex("Enter employee last name: ", "Please enter character only", "[a-zA-Z\s]+")));
@@ -16,5 +17,6 @@ public class EmployeeInputer {
         e.setSex(Validations.getSex("Please enter employee gender (Male or Female): "));
         e.setSalary(Validations.getInt("Please enter employee salary: ", "Please enter number only", "Please enter positive number", 0, Integer.MAX_VALUE));
         e.setAgency(Validations.getNonEmptyString("Please enter employee agency: "));
+        return e;
     }
 }

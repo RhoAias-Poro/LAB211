@@ -17,21 +17,19 @@ public class EmployeeManageController {
         inputer = new EmployeeInputer();
     }
 
-    public void addEmployee() {
-        employee = new Employee();
-        inputer.employeeInformationInput(employee);
+    public Employee addEmployee() throws Exception {
+        employee = inputer.employeeInformationInput();
         int check = manager.searchById(employee.getId());
         if (check == -1) {
-            manager.addEmployee(employee);
+            return manager.addEmployee(employee);
         } else {
-            System.out.println("Duplicate ID value");
-            addEmployee();
+            throw new Exception("Duplicate ID");
         }
     }
 
     public Employee updateEmployee(int id) throws Exception {
         employee = manager.getEmployeeById(id);
-        inputer.employeeInformationInput(employee);
+        employee = inputer.employeeInformationInput();
         return manager.updateEmployee(id, employee);
     }
 
@@ -41,24 +39,25 @@ public class EmployeeManageController {
 
     public String findEmployee(String name) {
         ArrayList<Employee> foundList = manager.findEmployeeWithName(name);
-        String ret = "";
-        for (Employee emp : foundList) {
-            ret += emp.getId() + " | " + emp.getFirstName() + " | " + emp.getLastName() + " | " + emp.getPhone() + " | " + emp.getEmail() + " | " + emp.getAddress() + " | " + emp.getDob() + " | " + emp.getSex() + " | " + emp.getSalary() + " | " + emp.getAgency() + "\n";
-        }
-        return ret;
+        return printList(foundList);
     }
 
     public String sortEmployee() {
         ArrayList<Employee> employeeList = manager.returnEmployeeList();
-        String ret = "";
         employeeList.sort(new Comparator<Employee>() {
             @Override
             public int compare(Employee o1, Employee o2) {
                 return o1.getSalary() - o2.getSalary();
             }
         });
+        return printList(employeeList);
+    }
+
+    private String printList(ArrayList<Employee> employeeList) {
+        if (employeeList.isEmpty()) return "the List is null";
+        String ret = "";
         for (Employee emp : employeeList) {
-            ret += emp.getId() + " | " + emp.getFirstName() + " | " + emp.getLastName() + " | " + emp.getPhone() + " | " + emp.getEmail() + " | " + emp.getAddress() + " | " + emp.getDob() + " | " + emp.getSex() + " | " + emp.getSalary() + " | " + emp.getAgency() + "\n";
+            ret += manager.toString(emp);
         }
         return ret;
     }

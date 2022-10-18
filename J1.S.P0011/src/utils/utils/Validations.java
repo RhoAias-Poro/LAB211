@@ -89,7 +89,6 @@ public class Validations {
     }
 
 
-
     public static String getStringByRegex(String mess, String error, String regex) {
         Scanner scan = new Scanner(System.in);
         String output = null;

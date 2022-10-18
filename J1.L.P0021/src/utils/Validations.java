@@ -26,12 +26,6 @@ public class Validations {
         return input;
     }
 
-    public static String pressUDtoContinue(String mess) {
-        //"Do you want to continue (Y/N): "
-        String input = getStringByRegex(mess, "U/D only!!!", "[UDud]");
-        return input;
-    }
-
     public static String normalFormName(String input) {
         input = removeUnnecessaryBlank(input);
         String temp[] = input.split(" ");
