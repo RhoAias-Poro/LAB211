@@ -3,7 +3,7 @@ package entity;
 public class StoreKeeper {
     private String name;
 
-    public StoreKeeper(){
+    public StoreKeeper() {
 
     }
 

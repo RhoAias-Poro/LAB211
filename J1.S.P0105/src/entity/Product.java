@@ -100,4 +100,9 @@ public class Product {
     public void setReceiptDate(Date receiptDate) {
         this.receiptDate = receiptDate;
     }
+
+//    @Override
+//    public String toString() {
+//        return (id + " | " + name + " | " + location + " | " + price + " | " + expireDate + " | " + produceDate + " | " + category + " | " + storeKeeper.getName() + " | " + receiptDate + "\n");
+//    }
 }

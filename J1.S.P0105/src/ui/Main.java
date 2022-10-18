@@ -15,7 +15,8 @@ public class Main {
                 "2. Add Product\n" +
                 "3. Update Product\n" +
                 "4. Search Product\n" +
-                "5. Sort Product by Expiry date, Date of manufacturer";
+                "5. Sort Product by Expiry date, Date of manufacturer\n" +
+                "6. Exit";
         String searchByChoice = "Element you want to search from\n" +
                 "1. Name\n" +
                 "2. Category\n" +
@@ -26,21 +27,26 @@ public class Main {
         ProductManagerController controller = new ProductManagerController();
         Product product = new Product();
         StoreKeeper storeKeeper = new StoreKeeper();
-        ArrayList<Product> ret;
+        ArrayList<Product> foundList;
+        String ret = "";
         do {
             System.out.println(menu);
             choice = IntegerUtils.getOption();
             switch (choice) {
                 case 1:
-                    storeKeeper = controller.addStoreKeeper();
-                    System.out.println("Add complete");
+                    try {
+                        storeKeeper = controller.addStoreKeeper();
+                        System.out.println("Add complete");
+                    } catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
                 case 2:
                     product = controller.addProduct();
                     System.out.println("Add complete");
                     break;
                 case 3:
-                    id = Validations.getInt("Please enter a id of a product", "Please enter number only", "Please enter positive number", 0, Integer.MAX_VALUE);
+                    id = Validations.getInt("Please enter a id of a product: ", "Please enter number only", "Please enter positive number", 0, Integer.MAX_VALUE);
                     try {
                         controller.updateProduct(id);
                     } catch (Exception e) {
@@ -49,10 +55,13 @@ public class Main {
                     break;
                 case 4:
                     searchChoice = Validations.getInt(searchByChoice, "Please enter number only", "Please enter number on the menu", 1, 4);
-                    ret = controller.searchByChoice(searchChoice);
-                    for (Product p : ret) {
-                        System.out.println(p.getId() + " | " + p.getName() + " | " + p.getLocation() + " | " + p.getPrice() + " | " + p.getExpireDate() + " | " + p.getProduceDate() + " | " + p.getCategory() + " | " + p.getStoreKeeper().getName() + " | " + p.getReceiptDate());
-                    }
+                    System.out.println(controller.searchByChoice(searchChoice));
+                    break;
+                case 5:
+                    System.out.println(controller.sortByDate());
+                    break;
+                default:
+                    choice = 6;
                     break;
             }
         } while (choice != 6);

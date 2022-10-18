@@ -9,12 +9,13 @@ import java.util.Date;
 public class ProductManager {
     ArrayList<Product> listProducts = new ArrayList<Product>();
 
-    public Product addProduct(Product product) {
+    public Product addProduct(Product product) throws Exception {
+        if (product == null) throw new Exception("Product cannot be null");
         listProducts.add(product);
         return product;
     }
 
-    private int searchById(int id) {
+    public int searchById(int id) {
         int index = 0;
         for (Product product : listProducts) {
             if (product.getId() == id) {
@@ -26,6 +27,7 @@ public class ProductManager {
     }
 
     public Product updateProduct(int id, Product s) throws Exception {
+        if (s == null) throw new Exception("Product cannot be null");
         int index = searchById(id);
         if (index != -1) return listProducts.set(index, s);
         throw new Exception("Product not found");
@@ -50,9 +52,18 @@ public class ProductManager {
         for (Product p : listProducts) {
             if (name != null && p.getName().toLowerCase().contains(name.toLowerCase())) ret.add(p);
             if (category != null && p.getCategory().toLowerCase().contains(category.toLowerCase())) ret.add(p);
-            if (s.getName() != null && p.getName().toLowerCase().contains(s.getName().toLowerCase())) ret.add(p);
+            if (s.getName() != null && p.getStoreKeeper().getName().toLowerCase().contains(s.getName().toLowerCase()))
+                ret.add(p);
             if (p.getReceiptDate().equals(receiptDate)) ret.add(p);
         }
         return ret;
+    }
+
+    public ArrayList<Product> returnProductList() {
+        return listProducts;
+    }
+
+    public String toString(Product p) {
+        return (p.getId() + " | " + p.getName() + " | " + p.getLocation() + " | " + p.getPrice() + " | " + p.getExpireDate() + " | " + p.getProduceDate() + " | " + p.getCategory() + " | " + p.getStoreKeeper().getName() + " | " + p.getReceiptDate() + "\n");
     }
 }
