@@ -42,8 +42,12 @@ public class Main {
                     }
                     break;
                 case 2:
-                    product = controller.addProduct();
-                    System.out.println("Add complete");
+                    try {
+                        product = controller.addProduct();
+                        System.out.println("Add complete");
+                    } catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
                 case 3:
                     id = Validations.getInt("Please enter a id of a product: ", "Please enter number only", "Please enter positive number", 0, Integer.MAX_VALUE);
@@ -55,10 +59,18 @@ public class Main {
                     break;
                 case 4:
                     searchChoice = Validations.getInt(searchByChoice, "Please enter number only", "Please enter number on the menu", 1, 4);
-                    System.out.println(controller.searchByChoice(searchChoice));
+                    try {
+                        System.out.println(controller.searchByChoice(searchChoice));
+                    } catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
                 case 5:
-                    System.out.println(controller.sortByDate());
+                    try {
+                        System.out.println(controller.sortByDate());
+                    } catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
                 default:
                     choice = 6;

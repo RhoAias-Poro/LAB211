@@ -22,9 +22,8 @@ public class EmployeeManageController {
         int check = manager.searchById(employee.getId());
         if (check == -1) {
             return manager.addEmployee(employee);
-        } else {
-            throw new Exception("Duplicate ID");
         }
+        throw new Exception("Duplicate ID");
     }
 
     public Employee updateEmployee(int id) throws Exception {
@@ -37,12 +36,12 @@ public class EmployeeManageController {
         return manager.deleteEmployee(id);
     }
 
-    public String findEmployee(String name) {
+    public String findEmployee(String name) throws Exception {
         ArrayList<Employee> foundList = manager.findEmployeeWithName(name);
         return printList(foundList);
     }
 
-    public String sortEmployee() {
+    public String sortEmployee() throws Exception {
         ArrayList<Employee> employeeList = manager.returnEmployeeList();
         employeeList.sort(new Comparator<Employee>() {
             @Override
@@ -54,7 +53,6 @@ public class EmployeeManageController {
     }
 
     private String printList(ArrayList<Employee> employeeList) {
-        if (employeeList.isEmpty()) return "the List is null";
         String ret = "";
         for (Employee emp : employeeList) {
             ret += manager.toString(emp);

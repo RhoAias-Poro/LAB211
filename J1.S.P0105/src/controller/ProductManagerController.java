@@ -89,9 +89,8 @@ public class ProductManagerController {
         return ret;
     }
 
-    public String sortByDate() {
+    public String sortByDate() throws Exception {
         ArrayList<Product> list = productManager.returnProductList();
-        if (list.isEmpty()) return "The list is empty";
         list.sort(new Comparator<Product>() {
             @Override
             public int compare(Product p1, Product p2) {

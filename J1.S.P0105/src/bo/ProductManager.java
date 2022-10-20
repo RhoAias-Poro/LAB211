@@ -7,7 +7,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ProductManager {
-    ArrayList<Product> listProducts = new ArrayList<Product>();
+    private ArrayList<Product> listProducts;
+
+    public ProductManager() {
+        listProducts = new ArrayList<>();
+    }
 
     public Product addProduct(Product product) throws Exception {
         if (product == null) throw new Exception("Product cannot be null");
@@ -56,10 +60,12 @@ public class ProductManager {
                 ret.add(p);
             if (p.getReceiptDate().equals(receiptDate)) ret.add(p);
         }
+        if (ret.isEmpty()) throw new Exception("No product can be found");
         return ret;
     }
 
-    public ArrayList<Product> returnProductList() {
+    public ArrayList<Product> returnProductList() throws Exception {
+        if (listProducts.isEmpty()) throw new Exception("The product list is empty");
         return listProducts;
     }
 

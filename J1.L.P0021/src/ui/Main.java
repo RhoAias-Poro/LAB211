@@ -20,11 +20,16 @@ public class Main {
 
         do {
             System.out.print(menu);
-            choice = Validations.getInt("(Please choose 1 to Create, 2 to Find and Sort, 3 to Update/Delete, 4 to Report and 5 to Exit program).", "Please enter number only", "Please enter in the menu above", 1, 5);
+            choice = Validations.getInt("(Please choose 1 to Create, 2 to Find and Sort, 3 to Update/Delete, 4 to Report and 5 to Exit program): ", "Please enter number only", "Please enter in the menu above", 1, 5);
             switch (choice) {
                 case 1:
                     while (true) {
-                        student = controller.addStudent();
+                        try {
+                            student = controller.addStudent();
+                            System.out.println("Add complete");
+                        } catch (Exception e) {
+                            System.err.println(e.getMessage());
+                        }
                         i++;
                         if (i >= 2) {
                             String input = Validations.pressYNtoContinue("Do you want to continue(Y/N): ");
@@ -34,7 +39,11 @@ public class Main {
                     break;
                 case 2:
                     String input = Validations.getStringByRegex("Please enter a name you want to search: ", "Please enter character only", "[a-zA-Z\s]");
-                    System.out.println(controller.findAndSort(input));
+                    try {
+                        System.out.println(controller.findAndSort(input));
+                    } catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
                 case 3:
                     System.out.print("Please enter a Student ID that you want to manipulate: ");
@@ -58,9 +67,13 @@ public class Main {
                         }
                     }
                 case 4:
-                    System.out.println(controller.report());
+                    try {
+                        System.out.println(controller.report());
+                    } catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
-                case 5:
+                default:
                     choice = 5;
                     break;
             }

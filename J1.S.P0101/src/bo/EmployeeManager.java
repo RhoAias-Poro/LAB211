@@ -12,13 +12,13 @@ public class EmployeeManager {
     }
 
     public Employee addEmployee(Employee employee) throws Exception {
-        if(employee == null) throw new Exception("Employee cannot be null");
+        if (employee == null) throw new Exception("Employee cannot be null");
         listEmployees.add(employee);
         return employee;
     }
 
     public int searchById(int id) throws Exception {
-        if(id < 0) throw new Exception("ID cannot be negative");
+        if (id < 0) throw new Exception("ID cannot be negative");
         int index = 0;
         for (Employee employee : listEmployees) {
             if (employee.getId() == id) {
@@ -30,7 +30,7 @@ public class EmployeeManager {
     }
 
     public Employee updateEmployee(int id, Employee s) throws Exception {
-        if(s == null) throw new Exception("Employee cannot be null");
+        if (s == null) throw new Exception("Employee cannot be null");
         int index = searchById(id);
         if (index != -1) return listEmployees.set(index, s);
         throw new Exception("Employee not found");
@@ -50,23 +50,23 @@ public class EmployeeManager {
         throw new Exception("Employee doesn't exist");
     }
 
-    public ArrayList<Employee> findEmployeeWithName(String name)
-    {
+    public ArrayList<Employee> findEmployeeWithName(String name) throws Exception {
         ArrayList<Employee> foundList = new ArrayList<Employee>();
         for (Employee employee : listEmployees) {
             if (employee.getFirstName().toLowerCase().contains(name.toLowerCase()) || employee.getLastName().toLowerCase().contains(name.toLowerCase())) {
                 foundList.add(employee);
             }
         }
+        if (foundList.isEmpty()) throw new Exception("The List employee with name does not exist");
         return foundList;
     }
 
-    public ArrayList<Employee> returnEmployeeList()
-    {
+    public ArrayList<Employee> returnEmployeeList() throws Exception {
+        if (listEmployees.isEmpty()) throw new Exception("The list employee is empty");
         return listEmployees;
     }
 
-    public String toString(Employee emp){
+    public String toString(Employee emp) {
         return (emp.getId() + " | " + emp.getFirstName() + " | " + emp.getLastName() + " | " + emp.getPhone() + " | " + emp.getEmail() + " | " + emp.getAddress() + " | " + emp.getDob() + " | " + emp.getSex() + " | " + emp.getSalary() + " | " + emp.getAgency() + "\n");
     }
 }

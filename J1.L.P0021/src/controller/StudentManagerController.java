@@ -22,20 +22,14 @@ public class StudentManagerController {
             Student isFound = studentManager.getStudentById(student.getId()); // throw exception if not found
             if (isFound.getStudentName().equalsIgnoreCase(student.getStudentName()) && !isFound.getSemester().equalsIgnoreCase(student.getSemester())) {
                 throw new Exception();
-            } else {
-                throw new Exception("Invalid Student Information");
             }
         } catch (Exception e) {
-            if (e.getMessage().equalsIgnoreCase("Invalid Student Information")) System.err.println(e.getMessage());
-            else {
-                studentManager.addStudent(student);
-                System.out.println("Add student complete");
-            }
+            return studentManager.addStudent(student);
         }
-        return student;
+        throw new Exception("Duplicate student");
     }
 
-    public String findAndSort(String input) {
+    public String findAndSort(String input) throws Exception {
         ArrayList<Student> foundList = studentManager.findAndSort(input);
         String ret = "";
         for (Student s : foundList) {
@@ -54,7 +48,7 @@ public class StudentManagerController {
         return studentManager.deleteStudent(id);
     }
 
-    public String report() {
+    public String report() throws Exception {
         ArrayList<Student> list = studentManager.getStudentList();
         String ret = "";
         while (list.size() > 0) {

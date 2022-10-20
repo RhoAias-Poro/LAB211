@@ -18,7 +18,8 @@ public class StudentManager implements Comparator<Student> {
         return s;
     }
 
-    public ArrayList<Student> getStudentList() {
+    public ArrayList<Student> getStudentList() throws Exception {
+        if (listStudent.isEmpty()) throw new Exception("The List of students is empty");
         return listStudent;
     }
 
@@ -54,15 +55,16 @@ public class StudentManager implements Comparator<Student> {
         throw new Exception("Student doesn't exist");
     }
 
-    public ArrayList<Student> findAndSort(String name) {
+    public ArrayList<Student> findAndSort(String name) throws Exception {
         ArrayList<Student> newList = new ArrayList<Student>();
+        if (listStudent.isEmpty()) throw new Exception("Student with name does not exist");
         for (Student student : listStudent) {
             //check student have name contains input
             if (student.getStudentName().toLowerCase().contains(name.toLowerCase())) {
                 newList.add(student);
             }
         }
-        if (!listStudent.isEmpty() && !newList.isEmpty()) {
+        if (!newList.isEmpty()) {
             newList.sort(new Comparator<Student>() {
                 @Override
                 public int compare(Student s1, Student s2) {
@@ -80,7 +82,7 @@ public class StudentManager implements Comparator<Student> {
     }
 
     public String toString(Student s) {
-        if(s == null) return "null";
+        if (s == null) return "null";
         String ret = "";
         for (int i = 0; i < s.getCourseName().size(); i++) {
             ret += s.getId() + " | " + s.getStudentName() + " | " + s.getSemester() + " | " + s.getCourseName().get(i) + "\n";
