@@ -38,7 +38,7 @@ public class Main {
                         storeKeeper = controller.addStoreKeeper();
                         System.out.println("Add complete");
                     } catch (Exception e) {
-                        System.err.println(e.getMessage());
+                        Validations.throwError(e.getMessage());
                     }
                     break;
                 case 2:
@@ -46,7 +46,7 @@ public class Main {
                         product = controller.addProduct();
                         System.out.println("Add complete");
                     } catch (Exception e) {
-                        System.err.println(e.getMessage());
+                        Validations.throwError(e.getMessage());
                     }
                     break;
                 case 3:
@@ -54,7 +54,7 @@ public class Main {
                     try {
                         controller.updateProduct(id);
                     } catch (Exception e) {
-                        System.err.println(e.getMessage());
+                        Validations.throwError(e.getMessage());
                     }
                     break;
                 case 4:
@@ -62,14 +62,14 @@ public class Main {
                     try {
                         System.out.println(controller.searchByChoice(searchChoice));
                     } catch (Exception e) {
-                        System.err.println(e.getMessage());
+                        Validations.throwError(e.getMessage());
                     }
                     break;
                 case 5:
                     try {
                         System.out.println(controller.sortByDate());
                     } catch (Exception e) {
-                        System.err.println(e.getMessage());
+                        Validations.throwError(e.getMessage());
                     }
                     break;
                 default:

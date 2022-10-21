@@ -66,10 +66,13 @@ public class ProductManager {
 
     public ArrayList<Product> returnProductList() throws Exception {
         if (listProducts.isEmpty()) throw new Exception("The product list is empty");
-        return listProducts;
+        ArrayList<Product> clone = new ArrayList<Product>(listProducts.size());
+        for (Product s : listProducts) clone.add(s);
+        return clone;
     }
 
-    public String toString(Product p) {
+    public String toString(Product p) throws Exception {
+        if (p == null) throw new Exception("Product cannot be null");
         return (p.getId() + " | " + p.getName() + " | " + p.getLocation() + " | " + p.getPrice() + " | " + p.getExpireDate() + " | " + p.getProduceDate() + " | " + p.getCategory() + " | " + p.getStoreKeeper().getName() + " | " + p.getReceiptDate() + "\n");
     }
 }

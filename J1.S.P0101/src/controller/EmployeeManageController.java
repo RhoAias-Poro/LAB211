@@ -52,7 +52,7 @@ public class EmployeeManageController {
         return printList(employeeList);
     }
 
-    private String printList(ArrayList<Employee> employeeList) {
+    private String printList(ArrayList<Employee> employeeList) throws Exception {
         String ret = "";
         for (Employee emp : employeeList) {
             ret += manager.toString(emp);

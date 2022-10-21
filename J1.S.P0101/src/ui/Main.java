@@ -21,7 +21,7 @@ public class Main {
                             employee = controller.addEmployee();
                             break;
                         } catch (Exception e) {
-                            System.err.println(e.getMessage());
+                            Validations.throwError(e.getMessage());
                         }
                     }
                     System.out.println("Add employee complete");
@@ -32,7 +32,7 @@ public class Main {
                         employee = controller.updateEmployee(id);
                         System.out.println("Update employee complete");
                     } catch (Exception e) {
-                        System.err.println(e.getMessage());
+                        Validations.throwError(e.getMessage());
                     }
                     break;
                 case 3:
@@ -41,7 +41,7 @@ public class Main {
                         employee = controller.deleteEmployee(id);
                         System.out.println("Delete employee complete");
                     } catch (Exception e) {
-                        System.err.println(e.getMessage());
+                        Validations.throwError(e.getMessage());
                     }
                     break;
                 case 4:
@@ -49,14 +49,14 @@ public class Main {
                     try {
                         System.out.println(controller.findEmployee(name));
                     } catch (Exception e) {
-                        System.err.println(e.getMessage());
+                        Validations.throwError(e.getMessage());
                     }
                     break;
                 case 5:
                     try {
                         System.out.println(controller.sortEmployee());
                     } catch (Exception e) {
-                        System.err.println(e.getMessage());
+                        Validations.throwError(e.getMessage());
                     }
                     break;
                 default:

@@ -4,6 +4,8 @@ import controller.BaseConverterController;
 import utils.utils.Validations;
 
 public class Main {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
     public static void main(String[] args) throws Exception {
         BaseConverterController controller = new BaseConverterController();
         String menu = "Welcome to base converter\n" +
@@ -21,7 +23,7 @@ public class Main {
             try {
                 System.out.println(controller.inputNumberAndBase(originalType, convertType, numbString));
             } catch (Exception e) {
-                System.err.println(e.getMessage());
+                Validations.throwError(e.getMessage());
             }
         }
     }

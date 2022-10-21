@@ -6,13 +6,13 @@ import java.math.BigInteger;
 
 
 public class BaseConvert {
-    private static String ValidateString = "0123456789ABCDEF";
+    private static String NUMBER_BASE_STRING = "0123456789ABCDEF";
     private BaseInputer baseInputer = new BaseInputer();
 
     private BigInteger baseToDec(String input, Base base) {
         BigInteger ret = BigInteger.ZERO;
         for (int i = 0; i < input.length(); i++) {
-            ret = ret.add(BigInteger.valueOf((long) (ValidateString.indexOf(input.charAt(i)) * Math.pow(base.getIntbyType(), input.length() - i - 1))));
+            ret = ret.add(BigInteger.valueOf((long) (NUMBER_BASE_STRING.indexOf(input.charAt(i)) * Math.pow(base.getIntbyType(), input.length() - i - 1))));
         }
         return ret;
     }
@@ -21,7 +21,7 @@ public class BaseConvert {
         BigInteger baseBig = new BigInteger(String.valueOf(base.getIntbyType()));
         String ret = "";
         while (input.compareTo(BigInteger.ZERO) > 0) {
-            ret += ValidateString.charAt(input.remainder(baseBig).intValue());
+            ret += NUMBER_BASE_STRING.charAt(input.remainder(baseBig).intValue());
             input = input.divide(baseBig);
         }
         StringBuilder sb = new StringBuilder(ret);

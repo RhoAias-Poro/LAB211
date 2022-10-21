@@ -5,9 +5,10 @@ import entity.StoreKeeper;
 import java.util.ArrayList;
 
 public class StoreKeeperManager {
-    ArrayList<StoreKeeper> listStoreKeepers = new ArrayList<StoreKeeper>();
+    ArrayList<StoreKeeper> listStoreKeepers;
 
     public StoreKeeperManager() {
+        listStoreKeepers = new ArrayList<StoreKeeper>();
     }
 
     public StoreKeeper addStoreKeeper(StoreKeeper s) throws Exception {

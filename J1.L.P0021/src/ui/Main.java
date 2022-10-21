@@ -16,8 +16,6 @@ public class Main {
                 "\t3. Update/Delete\n" +
                 "\t4. Report\n" +
                 "\t5. Exit";
-
-
         do {
             System.out.print(menu);
             choice = Validations.getInt("(Please choose 1 to Create, 2 to Find and Sort, 3 to Update/Delete, 4 to Report and 5 to Exit program): ", "Please enter number only", "Please enter in the menu above", 1, 5);
@@ -27,13 +25,16 @@ public class Main {
                         try {
                             student = controller.addStudent();
                             System.out.println("Add complete");
+                            i++;
                         } catch (Exception e) {
-                            System.err.println(e.getMessage());
+                            Validations.throwError(e.getMessage());
                         }
-                        i++;
                         if (i >= 2) {
                             String input = Validations.pressYNtoContinue("Do you want to continue(Y/N): ");
-                            if (input.equalsIgnoreCase("n")) break;
+                            if (input.equalsIgnoreCase("n")) {
+                                i = 0;
+                                break;
+                            }
                         }
                     }
                     break;
@@ -42,7 +43,7 @@ public class Main {
                     try {
                         System.out.println(controller.findAndSort(input));
                     } catch (Exception e) {
-                        System.err.println(e.getMessage());
+                        Validations.throwError(e.getMessage());
                     }
                     break;
                 case 3:
@@ -55,7 +56,7 @@ public class Main {
                             System.out.println("Update Student successfully!");
                             System.out.println(updateStudent);
                         } catch (Exception e) {
-                            System.err.println(e.getMessage());
+                            Validations.throwError(e.getMessage());
                         }
                     } else {
                         try {
@@ -63,20 +64,20 @@ public class Main {
                             System.out.println("Delete Student successfully!");
                             System.out.println(deleteStudent);
                         } catch (Exception e) {
-                            System.err.println(e.getMessage());
+                            Validations.throwError(e.getMessage());
                         }
                     }
                 case 4:
                     try {
                         System.out.println(controller.report());
                     } catch (Exception e) {
-                        System.err.println(e.getMessage());
+                        Validations.throwError(e.getMessage());
                     }
                     break;
                 default:
                     choice = 5;
                     break;
             }
-        } while (choice < 5);
+        } while (choice != 5);
     }
 }

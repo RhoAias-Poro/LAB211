@@ -20,7 +20,9 @@ public class StudentManager implements Comparator<Student> {
 
     public ArrayList<Student> getStudentList() throws Exception {
         if (listStudent.isEmpty()) throw new Exception("The List of students is empty");
-        return listStudent;
+        ArrayList<Student> clone = new ArrayList<Student>(listStudent.size());
+        for (Student s : listStudent) clone.add(s);
+        return clone;
     }
 
     private int searchById(String id) {
@@ -81,8 +83,8 @@ public class StudentManager implements Comparator<Student> {
         return 0;
     }
 
-    public String toString(Student s) {
-        if (s == null) return "null";
+    public String toString(Student s) throws Exception {
+        if (s == null) throw new Exception("Studnet cannot be null");
         String ret = "";
         for (int i = 0; i < s.getCourseName().size(); i++) {
             ret += s.getId() + " | " + s.getStudentName() + " | " + s.getSemester() + " | " + s.getCourseName().get(i) + "\n";

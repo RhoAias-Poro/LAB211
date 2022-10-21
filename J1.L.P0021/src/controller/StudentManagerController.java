@@ -20,8 +20,9 @@ public class StudentManagerController {
         student = studentsInputer.inputInformation();
         try {
             Student isFound = studentManager.getStudentById(student.getId()); // throw exception if not found
-            if (isFound.getStudentName().equalsIgnoreCase(student.getStudentName()) && !isFound.getSemester().equalsIgnoreCase(student.getSemester())) {
-                throw new Exception();
+            if (isFound.getStudentName().equalsIgnoreCase(student.getStudentName())) {
+                if (!isFound.getSemester().equalsIgnoreCase(student.getSemester())) throw new Exception();
+                else if (!isFound.getCourseName().equals(student.getCourseName())) throw new Exception();
             }
         } catch (Exception e) {
             return studentManager.addStudent(student);
@@ -56,34 +57,33 @@ public class StudentManagerController {
             int countJava = 0;
             int countNet = 0;
             int countCpp = 0;
-            if (listCourse1.contains(Student.courseName.getTypeByInt(1))) {
-                countJava += 1;
-            }
-            if (listCourse1.contains(Student.courseName.getTypeByInt(2))) {
-                countNet += 1;
-            }
-            if (listCourse1.contains(Student.courseName.getTypeByInt(3))) {
-                countCpp += 1;
-            }
+            countJava += countCourse(listCourse1, 1);
+            countNet += countCourse(listCourse1, 2);
+            countCpp += countCourse(listCourse1, 3);
             for (int j = 1; j < list.size(); j++) {
                 // same id but different semester
-                if (list.get(0).getId().equalsIgnoreCase(list.get(j).getId()) && !list.get(0).getSemester().equalsIgnoreCase(list.get(j).getSemester())) {
-                    ArrayList<Student.courseName> listCourse2 = list.get(j).getCourseName();
-                    if (listCourse2.contains(Student.courseName.getTypeByInt(1))) {
-                        countJava += 1;
+                if (list.get(0).getId().equalsIgnoreCase(list.get(j).getId())) {
+                    if (!list.get(0).getSemester().equalsIgnoreCase(list.get(j).getSemester())
+                            || (list.get(0).getSemester().equalsIgnoreCase(list.get(j).getSemester())
+                            && !list.get(0).getCourseName().equals(list.get(j).getCourseName()))) {
+                        ArrayList<Student.courseName> listCourse2 = list.get(j).getCourseName();
+                        countJava += countCourse(listCourse2, 1);
+                        countNet += countCourse(listCourse2, 2);
+                        countCpp += countCourse(listCourse2, 3);
                     }
-                    if (listCourse2.contains(Student.courseName.getTypeByInt(2))) {
-                        countNet += 1;
-                    }
-                    if (listCourse2.contains(Student.courseName.getTypeByInt(3))) {
-                        countCpp += 1;
-                    }
+                    list.remove(list.get(j));
                 }
-                list.remove(list.get(j));
             }
-            ret = list.get(0).getStudentName() + " | " + "Java" + "  | " + countJava + "\n" + list.get(0).getStudentName() + " | " + "Net" + "   | " + countNet + "\n" + list.get(0).getStudentName() + " | " + "Cpp" + "   | " + countCpp + "\n";
+            ret += list.get(0).getStudentName() + " | " + "Java" + "  | " + countJava + "\n" + list.get(0).getStudentName() + " | " + "Net" + "   | " + countNet + "\n" + list.get(0).getStudentName() + " | " + "Cpp" + "   | " + countCpp + "\n";
             list.remove(list.get(0));
         }
         return ret;
+    }
+
+    private int countCourse(ArrayList<Student.courseName> list, int course) {
+        if (list.contains(Student.courseName.getTypeByInt(course))) {
+            return 1;
+        }
+        return 0;
     }
 }

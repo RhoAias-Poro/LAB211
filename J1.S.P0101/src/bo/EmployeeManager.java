@@ -62,11 +62,14 @@ public class EmployeeManager {
     }
 
     public ArrayList<Employee> returnEmployeeList() throws Exception {
-        if (listEmployees.isEmpty()) throw new Exception("The list employee is empty");
-        return listEmployees;
+        if (listEmployees.isEmpty()) throw new Exception("The List of students is empty");
+        ArrayList<Employee> clone = new ArrayList<Employee>(listEmployees.size());
+        for (Employee s : listEmployees) clone.add(s);
+        return clone;
     }
 
-    public String toString(Employee emp) {
+    public String toString(Employee emp) throws Exception {
+        if(emp == null) throw new Exception("Employee cannot be null");
         return (emp.getId() + " | " + emp.getFirstName() + " | " + emp.getLastName() + " | " + emp.getPhone() + " | " + emp.getEmail() + " | " + emp.getAddress() + " | " + emp.getDob() + " | " + emp.getSex() + " | " + emp.getSalary() + " | " + emp.getAgency() + "\n");
     }
 }

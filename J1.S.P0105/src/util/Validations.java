@@ -52,7 +52,7 @@ public class Validations {
             System.out.print(mess);
             ret = removeUnnecessaryBlank(scan.nextLine());
             if (ret.equalsIgnoreCase("")) {
-                System.err.println("Please input Non-Empty String!!!");
+                throwError("Please input Non-Empty String!!!");
                 continue;
             }
             return ret;
@@ -81,7 +81,7 @@ public class Validations {
         while (true) {
             int ret = Integer.parseInt(getStringByRegex(mess, errorNumberFormat, "[0-9]+"));
             if (ret < min || ret > max) {
-                System.err.println(errorOutOfRange);
+                throwError(errorOutOfRange);
             } else {
                 return ret;
             }
@@ -98,7 +98,7 @@ public class Validations {
             if (output.matches(regex)) {
                 return output;
             } else {
-                System.err.println(error);
+                throwError(error);
             }
         }
     }
@@ -115,7 +115,7 @@ public class Validations {
         while (true) {
             String phoneNum = getStringByRegex(mess, "Please enter number only!!", regex).replaceAll("\\s+", "");
             if (phoneNum.length() < minLength) {
-                System.err.println("Phone number must be at least 10 characters");
+                throwError("Phone number must be at least 10 characters");
             } else {
                 return phoneNum;
             }
@@ -129,7 +129,7 @@ public class Validations {
             System.out.print(mess);
             String dob = scan.nextLine();
             if (dob.matches(regex)) return dob;
-            else System.err.println(error);
+            else throwError(error);
         }
     }
 
@@ -140,10 +140,16 @@ public class Validations {
             System.out.print(mess);
             ret = removeUnnecessaryBlank(scan.nextLine());
             if (!ret.equalsIgnoreCase("male") && !ret.equalsIgnoreCase("female")) {
-                System.err.println("Please input sex male or female!!!");
+                throwError("Please input sex male or female!!!");
                 continue;
             }
             return ret;
         }
+    }
+
+    public static void throwError(String message) {
+        String ANSI_RESET = "\u001B[0m";
+        String ANSI_RED = "\u001B[31m";
+        System.out.println(ANSI_RED + message + ANSI_RESET);
     }
 }

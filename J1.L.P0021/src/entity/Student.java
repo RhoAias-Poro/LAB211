@@ -12,10 +12,15 @@ public class Student {
 
     }
 
-    public Student(String id, String studentName, String semester) {
+    public Student(String id, String studentName, String semester, ArrayList<courseName> course) {
         this.id = id;
         this.studentName = studentName;
         this.semester = semester;
+        this.course = course;
+    }
+
+    public Student(Student student) {
+
     }
 
     public String getId() {
