@@ -30,7 +30,7 @@ public class Main {
                             Validations.throwError(e.getMessage());
                         }
                         if (i >= 2) {
-                            String input = Validations.pressYNtoContinue("Do you want to continue(Y/N): ");
+                            String input = Validations.pressYNtoContinue("Do you want to continue adding student(Y/N): ");
                             if (input.equalsIgnoreCase("n")) {
                                 i = 0;
                                 break;

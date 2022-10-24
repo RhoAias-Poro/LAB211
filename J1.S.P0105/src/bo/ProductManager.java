@@ -15,8 +15,12 @@ public class ProductManager {
 
     public Product addProduct(Product product) throws Exception {
         if (product == null) throw new Exception("Product cannot be null");
-        listProducts.add(product);
-        return product;
+        int i = searchById(product.getId());
+        if (i == -1) {
+            listProducts.add(product);
+            return product;
+        }
+        throw new Exception("Duplicate ID");
     }
 
     public int searchById(int id) {
@@ -40,16 +44,16 @@ public class ProductManager {
     public Product getProductById(int id) throws Exception {
         int index = searchById(id);
         if (index != -1) return listProducts.get(index);
-        throw new Exception("ID not found");
+        return null;
     }
 
-    public Product deleteProduct(int id) throws Exception {
-        int index = searchById(id);
-        if (index != -1) {
-            return listProducts.remove(index);
-        }
-        throw new Exception("Product doesn't exist");
-    }
+//    public Product deleteProduct(int id) throws Exception {
+//        int index = searchById(id);
+//        if (index != -1) {
+//            return listProducts.remove(index);
+//        }
+//        throw new Exception("Product doesn't exist");
+//    }
 
     public ArrayList<Product> getProducts(String name, String category, StoreKeeper s, Date receiptDate) throws Exception {
         ArrayList<Product> ret = new ArrayList<Product>();

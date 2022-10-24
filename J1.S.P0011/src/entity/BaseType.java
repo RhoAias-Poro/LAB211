@@ -1,35 +1,24 @@
 package entity;
 
-public class BaseType {
 
-    private Base t;
+public enum BaseType {
+    BIN, DEC, HEX;
 
-    public BaseType() {
-
+    public static BaseType inputNumberAndCovertBase(int input) throws Exception {
+        return switch (input) {
+            case 1 -> BaseType.BIN;
+            case 2 -> BaseType.DEC;
+            case 3 -> BaseType.HEX;
+            default -> throw new Exception("Please enter in the menu");
+        };
     }
 
-    public Base getBaseType() {
-        return t;
-    }
-
-    public void setBaseType(Base t) {
-        this.t = t;
-    }
-
-    public enum Base {
-        BIN, DEC, HEX;
-
-        public int getIntbyType() {
-            switch (this) {
-                case BIN:
-                    return 2;
-                case DEC:
-                    return 10;
-                case HEX:
-                    return 16;
-                default:
-                    throw new AssertionError();
-            }
-        }
+    public int getIntbyType() {
+        return switch (this) {
+            case BIN -> 2;
+            case DEC -> 10;
+            case HEX -> 16;
+            default -> throw new AssertionError();
+        };
     }
 }

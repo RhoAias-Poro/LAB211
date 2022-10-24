@@ -15,10 +15,16 @@ public class StudentsInputer {
         s.setSemester(Validations.getNonEmptyString("Enter Semester Name: "));
         while (true) {
             int courseID = Validations.getInt(courseInfo + "Enter Course ID: ", "Please enter number only", "Please enter courseID on the screen only", 1, 3);
-            s.setCourseName(Student.courseName.getTypeByInt(courseID));
+            s.setCourseName(Student.CourseName.getTypeByInt(courseID));
             i++;
+            if (s.getCourseName().size() == 3) {
+                System.out.println("Full course can enter in one semester");
+                break;
+            }
             String input = Validations.pressYNtoContinue("Do you want to continue adding course(Y/N)?: ");
-            if (input.toLowerCase().equals("n") || i == 3) break;
+            if (input.toLowerCase().equals("n")) {
+                break;
+            }
         }
         return s;
     }

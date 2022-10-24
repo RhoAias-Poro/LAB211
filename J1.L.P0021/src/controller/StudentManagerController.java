@@ -18,20 +18,11 @@ public class StudentManagerController {
 
     public Student addStudent() throws Exception {
         student = studentsInputer.inputInformation();
-        try {
-            Student isFound = studentManager.getStudentById(student.getId()); // throw exception if not found
-            if (isFound.getStudentName().equalsIgnoreCase(student.getStudentName())) {
-                if (!isFound.getSemester().equalsIgnoreCase(student.getSemester())) throw new Exception();
-                else if (!isFound.getCourseName().equals(student.getCourseName())) throw new Exception();
-            }
-        } catch (Exception e) {
-            return studentManager.addStudent(student);
-        }
-        throw new Exception("Duplicate student");
+        return studentManager.addStudent(student);
     }
 
-    public String findAndSort(String input) throws Exception {
-        ArrayList<Student> foundList = studentManager.findAndSort(input);
+    public String findAndSort(String name) throws Exception {
+        ArrayList<Student> foundList = studentManager.findAndSortByName(name);
         String ret = "";
         for (Student s : foundList) {
             ret += studentManager.toString(s);
@@ -53,7 +44,7 @@ public class StudentManagerController {
         ArrayList<Student> list = studentManager.getStudentList();
         String ret = "";
         while (list.size() > 0) {
-            ArrayList<Student.courseName> listCourse1 = list.get(0).getCourseName();
+            ArrayList<Student.CourseName> listCourse1 = list.get(0).getCourseName();
             int countJava = 0;
             int countNet = 0;
             int countCpp = 0;
@@ -66,7 +57,7 @@ public class StudentManagerController {
                     if (!list.get(0).getSemester().equalsIgnoreCase(list.get(j).getSemester())
                             || (list.get(0).getSemester().equalsIgnoreCase(list.get(j).getSemester())
                             && !list.get(0).getCourseName().equals(list.get(j).getCourseName()))) {
-                        ArrayList<Student.courseName> listCourse2 = list.get(j).getCourseName();
+                        ArrayList<Student.CourseName> listCourse2 = list.get(j).getCourseName();
                         countJava += countCourse(listCourse2, 1);
                         countNet += countCourse(listCourse2, 2);
                         countCpp += countCourse(listCourse2, 3);
@@ -80,8 +71,8 @@ public class StudentManagerController {
         return ret;
     }
 
-    private int countCourse(ArrayList<Student.courseName> list, int course) {
-        if (list.contains(Student.courseName.getTypeByInt(course))) {
+    private int countCourse(ArrayList<Student.CourseName> list, int course) {
+        if (list.contains(Student.CourseName.getTypeByInt(course))) {
             return 1;
         }
         return 0;

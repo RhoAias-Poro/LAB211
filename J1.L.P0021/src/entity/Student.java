@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public class Student {
     private String studentName;
     private String semester;
-    private ArrayList<courseName> course = new ArrayList<courseName>();
+    private ArrayList<CourseName> course = new ArrayList<CourseName>();
     private String id;
 
     public Student() {
 
     }
 
-    public Student(String id, String studentName, String semester, ArrayList<courseName> course) {
+    public Student(String id, String studentName, String semester, ArrayList<CourseName> course) {
         this.id = id;
         this.studentName = studentName;
         this.semester = semester;
@@ -47,18 +47,18 @@ public class Student {
         this.semester = semester;
     }
 
-    public ArrayList<courseName> getCourseName() {
+    public ArrayList<CourseName> getCourseName() {
         return course;
     }
 
-    public void setCourseName(courseName course) {
+    public void setCourseName(CourseName course) {
         this.course.add(course);
     }
 
-    public enum courseName {
+    public enum CourseName {
         Java, Net, Cpp;
 
-        public static courseName getTypeByInt(int type) {
+        public static CourseName getTypeByInt(int type) {
             switch (type) {
                 case 1:
                     return Java;

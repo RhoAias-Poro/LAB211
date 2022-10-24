@@ -13,8 +13,12 @@ public class EmployeeManager {
 
     public Employee addEmployee(Employee employee) throws Exception {
         if (employee == null) throw new Exception("Employee cannot be null");
-        listEmployees.add(employee);
-        return employee;
+        int check = searchById(employee.getId());
+        if (check == -1) {
+            listEmployees.add(employee);
+            return employee;
+        }
+        throw new Exception("Duplicate employee information");
     }
 
     public int searchById(int id) throws Exception {
@@ -39,7 +43,7 @@ public class EmployeeManager {
     public Employee getEmployeeById(int id) throws Exception {
         int index = searchById(id);
         if (index != -1) return listEmployees.get(index);
-        throw new Exception("ID not found");
+        return null;
     }
 
     public Employee deleteEmployee(int id) throws Exception {
@@ -69,7 +73,7 @@ public class EmployeeManager {
     }
 
     public String toString(Employee emp) throws Exception {
-        if(emp == null) throw new Exception("Employee cannot be null");
+        if (emp == null) throw new Exception("Employee cannot be null");
         return (emp.getId() + " | " + emp.getFirstName() + " | " + emp.getLastName() + " | " + emp.getPhone() + " | " + emp.getEmail() + " | " + emp.getAddress() + " | " + emp.getDob() + " | " + emp.getSex() + " | " + emp.getSalary() + " | " + emp.getAgency() + "\n");
     }
 }

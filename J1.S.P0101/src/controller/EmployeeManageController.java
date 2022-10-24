@@ -19,11 +19,7 @@ public class EmployeeManageController {
 
     public Employee addEmployee() throws Exception {
         employee = inputer.employeeInformationInput();
-        int check = manager.searchById(employee.getId());
-        if (check == -1) {
-            return manager.addEmployee(employee);
-        }
-        throw new Exception("Duplicate ID");
+        return manager.addEmployee(employee);
     }
 
     public Employee updateEmployee(int id) throws Exception {
@@ -36,7 +32,7 @@ public class EmployeeManageController {
         return manager.deleteEmployee(id);
     }
 
-    public String findEmployee(String name) throws Exception {
+    public String findEmployeeByName(String name) throws Exception {
         ArrayList<Employee> foundList = manager.findEmployeeWithName(name);
         return printList(foundList);
     }

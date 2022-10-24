@@ -47,7 +47,7 @@ public class Main {
                 case 4:
                     String name = Validations.getStringByRegex("Enter employee name that you want to find: ", "Please enter character only", "[a-zA-Z\s]+");
                     try {
-                        System.out.println(controller.findEmployee(name));
+                        System.out.println(controller.findEmployeeByName(name));
                     } catch (Exception e) {
                         Validations.throwError(e.getMessage());
                     }

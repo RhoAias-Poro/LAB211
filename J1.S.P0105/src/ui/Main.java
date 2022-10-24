@@ -52,7 +52,7 @@ public class Main {
                 case 3:
                     id = Validations.getInt("Please enter a id of a product: ", "Please enter number only", "Please enter positive number", 0, Integer.MAX_VALUE);
                     try {
-                        controller.updateProduct(id);
+                        product = controller.updateProduct(id);
                     } catch (Exception e) {
                         Validations.throwError(e.getMessage());
                     }

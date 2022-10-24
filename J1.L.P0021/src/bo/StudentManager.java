@@ -5,8 +5,9 @@ import entity.Student;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class StudentManager implements Comparator<Student> {
+public class StudentManager {
     private ArrayList<Student> listStudent;
+    private Student student;
 
     public StudentManager() {
         listStudent = new ArrayList<Student>();
@@ -14,8 +15,50 @@ public class StudentManager implements Comparator<Student> {
 
     public Student addStudent(Student s) throws Exception {
         if (s == null) throw new Exception("Student cannot be null");
-        listStudent.add(s);
-        return s;
+        student = getStudentById(s.getId());
+        if (checkDuplicateCourseOnEachStudent(s.getCourseName())) {
+            throw new Exception("Duplicate course in the student you enter");
+        }
+        if (checkDuplicateStudentInformation(s, student)) {
+            listStudent.add(s);
+            return s;
+        }
+        throw new Exception("There has a student with this information");
+    }
+
+    private boolean checkDuplicateCourseOnEachStudent(ArrayList<Student.CourseName> listCourse) {
+        for (int i = 0; i < listCourse.size(); i++) {
+            for (int j = i + 1; j < listCourse.size(); j++) {
+                if (listCourse.get(i).equals(listCourse.get(j))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean checkDuplicateCourseOnTwoStudent(ArrayList<Student.CourseName> students1, ArrayList<Student.CourseName> students2) {
+        for (Student.CourseName name : students1) {
+            for (Student.CourseName courseName : students2) {
+                if (name.equals(courseName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean checkDuplicateStudentInformation(Student studentAdd, Student studentCheck) {
+        if (studentCheck == null) {
+            return true;
+        }
+        if (studentAdd.getStudentName().equalsIgnoreCase(studentCheck.getStudentName())) {
+            if (!studentAdd.getSemester().equalsIgnoreCase(studentCheck.getSemester()) || (studentAdd.getSemester().equalsIgnoreCase(studentCheck.getSemester())
+                    && !checkDuplicateCourseOnTwoStudent(studentAdd.getCourseName(), studentCheck.getCourseName()))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public ArrayList<Student> getStudentList() throws Exception {
@@ -46,7 +89,7 @@ public class StudentManager implements Comparator<Student> {
     public Student getStudentById(String id) throws Exception {
         int index = searchById(id);
         if (index != -1) return listStudent.get(index);
-        throw new Exception("ID not found");
+        return null;
     }
 
     public Student deleteStudent(String id) throws Exception {
@@ -57,7 +100,7 @@ public class StudentManager implements Comparator<Student> {
         throw new Exception("Student doesn't exist");
     }
 
-    public ArrayList<Student> findAndSort(String name) throws Exception {
+    public ArrayList<Student> findAndSortByName(String name) throws Exception {
         ArrayList<Student> newList = new ArrayList<Student>();
         if (listStudent.isEmpty()) throw new Exception("Student with name does not exist");
         for (Student student : listStudent) {
@@ -78,13 +121,9 @@ public class StudentManager implements Comparator<Student> {
         return newList;
     }
 
-    @Override
-    public int compare(Student o1, Student o2) {
-        return 0;
-    }
 
     public String toString(Student s) throws Exception {
-        if (s == null) throw new Exception("Studnet cannot be null");
+        if (s == null) throw new Exception("Student cannot be null");
         String ret = "";
         for (int i = 0; i < s.getCourseName().size(); i++) {
             ret += s.getId() + " | " + s.getStudentName() + " | " + s.getSemester() + " | " + s.getCourseName().get(i) + "\n";

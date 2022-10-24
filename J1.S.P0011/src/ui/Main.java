@@ -6,13 +6,10 @@ import utils.utils.Validations;
 public class Main {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
+
     public static void main(String[] args) throws Exception {
         BaseConverterController controller = new BaseConverterController();
-        String menu = "Welcome to base converter\n" +
-                "1. Binary\n" +
-                "2. Decimal\n" +
-                "3. Hexadecimal\n" +
-                "4. Exit\n";
+        String menu = "Welcome to base converter\n" + "1. Binary\n" + "2. Decimal\n" + "3. Hexadecimal\n" + "4. Exit\n";
         while (true) {
             System.out.println(menu);
             int convertType = Validations.getInt("Please enter a option: ", "Please enter number format", "Enter option in above", 1, 4);

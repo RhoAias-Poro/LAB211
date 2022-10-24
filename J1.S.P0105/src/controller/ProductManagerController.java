@@ -25,40 +25,23 @@ public class ProductManagerController {
         storeKeeperManager = new StoreKeeperManager();
     }
 
-    private int checkStoreKeeper(StoreKeeper storeKeeper) throws Exception {
-        try {
-            storeKeeperManager.searchByStoreKeeper(storeKeeper);
-            return 1;
-        } catch (Exception e) {
-            storeKeeperManager.addStoreKeeper(storeKeeper);
-            return -1;
-        }
-    }
 
     public StoreKeeper addStoreKeeper() throws Exception {
         storeKeeper = input.storeKeeperInput();
-        int i = checkStoreKeeper(storeKeeper);
-        if (i == 1) throw new Exception("This StoreKeeper is already exist");
-        else return storeKeeper;
+        return storeKeeperManager.addStoreKeeper(storeKeeper);
     }
 
     public Product addProduct() throws Exception {
         product = input.productInput();
-        checkStoreKeeper(product.getStoreKeeper());
-        int i = productManager.searchById(product.getId());
-        if (i == -1) return productManager.addProduct(product);
-        else throw new Exception("Duplicate ID");
+        storeKeeperManager.ensureStoreKeeperExist(product.getStoreKeeper());
+        return productManager.addProduct(product);
     }
 
     public Product updateProduct(int id) throws Exception {
-        try {
-            product = productManager.getProductById(id);
-            storeKeeper = new StoreKeeper();
-            product = input.productInput();
-            return productManager.updateProduct(id, product);
-        } catch (Exception e) {
-            throw new Exception("This product not exist");
-        }
+        product = productManager.getProductById(id);
+        if (product == null) throw new Exception(("Can't found the product "));
+        product = input.productInput();
+        return productManager.updateProduct(id, product);
     }
 
     public String searchByChoice(int choice) throws Exception {
@@ -69,18 +52,14 @@ public class ProductManagerController {
         String category = null;
         storeKeeper = new StoreKeeper(null);
         switch (choice) {
-            case 1:
-                name = Validations.getStringByRegex("Please enter name of the product: ", "Please enter character only", "[a-zA-X\s]+");
-                break;
-            case 2:
-                category = Validations.getStringByRegex("Please enter category for the product: ", "Please enter character only", "[a-zA-X\s]+");
-                break;
-            case 3:
-                storeKeeper.setName(Validations.getStringByRegex("Please enter name of the seller: ", "Please enter character only", "[a-zA-X\s]+"));
-                break;
-            case 4:
-                receiptDate = new SimpleDateFormat("dd/MM/yyyy").parse(Validations.getDob("Please enter receipt date of product (dd/mm/yyyy): ", "Please enter date match the form dd/mm/yyyy"));
-                break;
+            case 1 ->
+                    name = Validations.getStringByRegex("Please enter name of the product: ", "Please enter character only", "[a-zA-X\s]+");
+            case 2 ->
+                    category = Validations.getStringByRegex("Please enter category for the product: ", "Please enter character only", "[a-zA-X\s]+");
+            case 3 ->
+                    storeKeeper.setName(Validations.getStringByRegex("Please enter name of the seller: ", "Please enter character only", "[a-zA-X\s]+"));
+            case 4 ->
+                    receiptDate = new SimpleDateFormat("dd/MM/yyyy").parse(Validations.getDob("Please enter receipt date of product (dd/mm/yyyy): ", "Please enter date match the form dd/mm/yyyy"));
         }
         list = productManager.getProducts(name, category, storeKeeper, receiptDate);
         for (Product product : list) {
