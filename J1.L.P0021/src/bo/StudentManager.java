@@ -13,7 +13,7 @@ public class StudentManager {
         listStudent = new ArrayList<Student>();
     }
 
-    public Student addStudent(Student s) throws Exception {
+    public boolean addStudent(Student s) throws Exception {
         if (s == null) {
             throw new Exception("Student cannot be null");
         }
@@ -22,8 +22,7 @@ public class StudentManager {
             throw new Exception("Duplicate course in the student you enter");
         }
         if (checkDuplicateStudentInformation(s, student)) {
-            listStudent.add(s);
-            return s;
+            return listStudent.add(s);
         }
         throw new Exception("There has a student with this information");
     }

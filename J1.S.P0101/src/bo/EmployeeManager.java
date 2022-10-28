@@ -11,18 +11,21 @@ public class EmployeeManager {
         listEmployees = new ArrayList<Employee>();
     }
 
-    public Employee addEmployee(Employee employee) throws Exception {
-        if (employee == null) throw new Exception("Employee cannot be null");
+    public boolean addEmployee(Employee employee) throws Exception {
+        if (employee == null) {
+            throw new Exception("Employee cannot be null");
+        }
         int check = searchById(employee.getId());
         if (check == -1) {
-            listEmployees.add(employee);
-            return employee;
+            return listEmployees.add(employee);
         }
         throw new Exception("Duplicate employee information");
     }
 
     public int searchById(int id) throws Exception {
-        if (id < 0) throw new Exception("ID cannot be negative");
+        if (id < 0) {
+            throw new Exception("ID cannot be negative");
+        }
         int index = 0;
         for (Employee employee : listEmployees) {
             if (employee.getId() == id) {
@@ -34,15 +37,21 @@ public class EmployeeManager {
     }
 
     public Employee updateEmployee(int id, Employee s) throws Exception {
-        if (s == null) throw new Exception("Employee cannot be null");
+        if (s == null) {
+            throw new Exception("Employee cannot be null");
+        }
         int index = searchById(id);
-        if (index != -1) return listEmployees.set(index, s);
+        if (index != -1) {
+            return listEmployees.set(index, s);
+        }
         throw new Exception("Employee not found");
     }
 
     public Employee getEmployeeById(int id) throws Exception {
         int index = searchById(id);
-        if (index != -1) return listEmployees.get(index);
+        if (index != -1) {
+            return listEmployees.get(index);
+        }
         return null;
     }
 
@@ -61,19 +70,27 @@ public class EmployeeManager {
                 foundList.add(employee);
             }
         }
-        if (foundList.isEmpty()) throw new Exception("The List employee with name does not exist");
+        if (foundList.isEmpty()) {
+            throw new Exception("The List employee with name does not exist");
+        }
         return foundList;
     }
 
     public ArrayList<Employee> returnEmployeeList() throws Exception {
-        if (listEmployees.isEmpty()) throw new Exception("The List of students is empty");
+        if (listEmployees.isEmpty()) {
+            throw new Exception("The List of students is empty");
+        }
         ArrayList<Employee> clone = new ArrayList<Employee>(listEmployees.size());
-        for (Employee s : listEmployees) clone.add(s);
+        for (Employee s : listEmployees) {
+            clone.add(s);
+        }
         return clone;
     }
 
     public String toString(Employee emp) throws Exception {
-        if (emp == null) throw new Exception("Employee cannot be null");
+        if (emp == null) {
+            throw new Exception("Employee cannot be null");
+        }
         return (emp.getId() + " | " + emp.getFirstName() + " | " + emp.getLastName() + " | " + emp.getPhone() + " | " + emp.getEmail() + " | " + emp.getAddress() + " | " + emp.getDob() + " | " + emp.getSex() + " | " + emp.getSalary() + " | " + emp.getAgency() + "\n");
     }
 }

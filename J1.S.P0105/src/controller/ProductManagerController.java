@@ -13,6 +13,10 @@ import java.util.Comparator;
 import java.util.Date;
 
 public class ProductManagerController {
+    private final int SEARCH_BY_NAME = 1;
+    private final int SEARCH_BY_CATEGORY = 2;
+    private final int SEARCH_BY_STOREKEPPER = 3;
+    private final int SEARCH_BY_RECIPTDATE = 4;
     private ProductManager productManager;
     private ProductManagementInputer input;
     private StoreKeeperManager storeKeeperManager;
@@ -28,18 +32,22 @@ public class ProductManagerController {
 
     public StoreKeeper addStoreKeeper() throws Exception {
         storeKeeper = input.storeKeeperInput();
-        return storeKeeperManager.addStoreKeeper(storeKeeper);
+        storeKeeperManager.addStoreKeeper(storeKeeper);
+        return storeKeeper;
     }
 
     public Product addProduct() throws Exception {
         product = input.productInput();
         storeKeeperManager.ensureStoreKeeperExist(product.getStoreKeeper());
-        return productManager.addProduct(product);
+        productManager.addProduct(product);
+        return product;
     }
 
     public Product updateProduct(int id) throws Exception {
         product = productManager.getProductById(id);
-        if (product == null) throw new Exception(("Can't found the product "));
+        if (product == null) {
+            throw new Exception(("Can't found the product "));
+        }
         product = input.productInput();
         return productManager.updateProduct(id, product);
     }
@@ -52,13 +60,13 @@ public class ProductManagerController {
         String category = null;
         storeKeeper = new StoreKeeper(null);
         switch (choice) {
-            case 1 ->
+            case SEARCH_BY_NAME ->
                     name = Validations.getStringByRegex("Please enter name of the product: ", "Please enter character only", "[a-zA-X\s]+");
-            case 2 ->
+            case SEARCH_BY_CATEGORY ->
                     category = Validations.getStringByRegex("Please enter category for the product: ", "Please enter character only", "[a-zA-X\s]+");
-            case 3 ->
+            case SEARCH_BY_STOREKEPPER ->
                     storeKeeper.setName(Validations.getStringByRegex("Please enter name of the seller: ", "Please enter character only", "[a-zA-X\s]+"));
-            case 4 ->
+            case SEARCH_BY_RECIPTDATE ->
                     receiptDate = new SimpleDateFormat("dd/MM/yyyy").parse(Validations.getDob("Please enter receipt date of product (dd/mm/yyyy): ", "Please enter date match the form dd/mm/yyyy"));
         }
         list = productManager.getProducts(name, category, storeKeeper, receiptDate);

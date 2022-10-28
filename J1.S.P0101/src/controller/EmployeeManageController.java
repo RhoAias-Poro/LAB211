@@ -19,7 +19,8 @@ public class EmployeeManageController {
 
     public Employee addEmployee() throws Exception {
         employee = inputer.employeeInformationInput();
-        return manager.addEmployee(employee);
+        manager.addEmployee(employee);
+        return employee;
     }
 
     public Employee updateEmployee(int id) throws Exception {

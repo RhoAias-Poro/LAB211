@@ -76,7 +76,7 @@ public class ArrayUtils {
             System.out.println("----- Descending -----");
             for (int i = 0; i < arrayLength; i++) {
                 System.out.print("[" + array[i] + "]");
-                if (i < arrayLength-1) System.out.print("<-");
+                if (i < arrayLength - 1) System.out.print("<-");
             }
         }
         System.out.println();

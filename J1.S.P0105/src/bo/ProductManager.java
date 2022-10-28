@@ -40,7 +40,9 @@ public class ProductManager {
             throw new Exception("Product cannot be null");
         }
         int index = searchById(id);
-        if (index != -1) return listProducts.set(index, s);
+        if (index != -1) {
+            return listProducts.set(index, s);
+        }
         throw new Exception("Product not found");
     }
 
@@ -63,25 +65,40 @@ public class ProductManager {
     public ArrayList<Product> getProducts(String name, String category, StoreKeeper s, Date receiptDate) throws Exception {
         ArrayList<Product> ret = new ArrayList<Product>();
         for (Product p : listProducts) {
-            if (name != null && p.getName().toLowerCase().contains(name.toLowerCase())) ret.add(p);
-            if (category != null && p.getCategory().toLowerCase().contains(category.toLowerCase())) ret.add(p);
-            if (s.getName() != null && p.getStoreKeeper().getName().toLowerCase().contains(s.getName().toLowerCase()))
+            if (name != null && p.getName().toLowerCase().contains(name.toLowerCase())) {
                 ret.add(p);
-            if (p.getReceiptDate().equals(receiptDate)) ret.add(p);
+            }
+            if (category != null && p.getCategory().toLowerCase().contains(category.toLowerCase())) {
+                ret.add(p);
+            }
+            if (s.getName() != null && p.getStoreKeeper().getName().toLowerCase().contains(s.getName().toLowerCase())) {
+                ret.add(p);
+            }
+            if (p.getReceiptDate().equals(receiptDate)) {
+                ret.add(p);
+            }
         }
-        if (ret.isEmpty()) throw new Exception("No product can be found");
+        if (ret.isEmpty()) {
+            throw new Exception("No product can be found");
+        }
         return ret;
     }
 
     public ArrayList<Product> getListProduct() throws Exception {
-        if (listProducts.isEmpty()) throw new Exception("The product list is empty");
+        if (listProducts.isEmpty()) {
+            throw new Exception("The product list is empty");
+        }
         ArrayList<Product> clone = new ArrayList<Product>(listProducts.size());
-        for (Product s : listProducts) clone.add(s);
+        for (Product s : listProducts) {
+            clone.add(s);
+        }
         return clone;
     }
 
     public String toString(Product p) throws Exception {
-        if (p == null) throw new Exception("Product cannot be null");
+        if (p == null) {
+            throw new Exception("Product cannot be null");
+        }
         return (p.getId() + " | " + p.getName() + " | " + p.getLocation() + " | " + p.getPrice() + " | " + p.getExpireDate() + " | " + p.getProduceDate() + " | " + p.getCategory() + " | " + p.getStoreKeeper().getName() + " | " + p.getReceiptDate() + "\n");
     }
 }

@@ -19,10 +19,6 @@ public class Student {
         this.course = course;
     }
 
-    public Student(Student student) {
-
-    }
-
     public String getId() {
         return id;
     }

@@ -11,13 +11,14 @@ public class StoreKeeperManager {
         listStoreKeepers = new ArrayList<StoreKeeper>();
     }
 
-    public StoreKeeper addStoreKeeper(StoreKeeper s) throws Exception {
-        if (s == null) throw new Exception("StoreKeeper cannot be null");
+    public boolean addStoreKeeper(StoreKeeper s) throws Exception {
+        if (s == null) {
+            throw new Exception("StoreKeeper cannot be null");
+        }
         if (ensureStoreKeeperExist(s)) {
             throw new Exception("Duplicate storekepper information");
         }
-        listStoreKeepers.add(s);
-        return s;
+        return listStoreKeepers.add(s);
     }
 
     public StoreKeeper getStoreKeeperByName(String skk) throws Exception {

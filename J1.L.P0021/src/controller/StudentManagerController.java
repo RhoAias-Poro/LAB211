@@ -18,7 +18,8 @@ public class StudentManagerController {
 
     public Student addStudent() throws Exception {
         student = studentsInputer.inputInformation();
-        return studentManager.addStudent(student);
+        studentManager.addStudent(student);
+        return student;
     }
 
     public String findAndSort(String name) throws Exception {
@@ -54,9 +55,7 @@ public class StudentManagerController {
             for (int j = 1; j < list.size(); j++) {
                 // same id but different semester
                 if (list.get(0).getId().equalsIgnoreCase(list.get(j).getId())) {
-                    if (!list.get(0).getSemester().equalsIgnoreCase(list.get(j).getSemester())
-                            || (list.get(0).getSemester().equalsIgnoreCase(list.get(j).getSemester())
-                            && !list.get(0).getCourseName().equals(list.get(j).getCourseName()))) {
+                    if (!list.get(0).getSemester().equalsIgnoreCase(list.get(j).getSemester()) || (list.get(0).getSemester().equalsIgnoreCase(list.get(j).getSemester()) && !list.get(0).getCourseName().equals(list.get(j).getCourseName()))) {
                         ArrayList<Student.CourseName> listCourse2 = list.get(j).getCourseName();
                         countJava += countCourse(listCourse2, 1);
                         countNet += countCourse(listCourse2, 2);
