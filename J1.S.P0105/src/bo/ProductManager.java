@@ -13,12 +13,13 @@ public class ProductManager {
         listProducts = new ArrayList<>();
     }
 
-    public Product addProduct(Product product) throws Exception {
-        if (product == null) throw new Exception("Product cannot be null");
+    public boolean addProduct(Product product) throws Exception {
+        if (product == null) {
+            throw new Exception("Product cannot be null");
+        }
         int i = searchById(product.getId());
         if (i == -1) {
-            listProducts.add(product);
-            return product;
+            return listProducts.add(product);
         }
         throw new Exception("Duplicate ID");
     }
@@ -35,7 +36,9 @@ public class ProductManager {
     }
 
     public Product updateProduct(int id, Product s) throws Exception {
-        if (s == null) throw new Exception("Product cannot be null");
+        if (s == null) {
+            throw new Exception("Product cannot be null");
+        }
         int index = searchById(id);
         if (index != -1) return listProducts.set(index, s);
         throw new Exception("Product not found");
@@ -43,7 +46,9 @@ public class ProductManager {
 
     public Product getProductById(int id) throws Exception {
         int index = searchById(id);
-        if (index != -1) return listProducts.get(index);
+        if (index != -1) {
+            return listProducts.get(index);
+        }
         return null;
     }
 
@@ -68,7 +73,7 @@ public class ProductManager {
         return ret;
     }
 
-    public ArrayList<Product> returnProductList() throws Exception {
+    public ArrayList<Product> getListProduct() throws Exception {
         if (listProducts.isEmpty()) throw new Exception("The product list is empty");
         ArrayList<Product> clone = new ArrayList<Product>(listProducts.size());
         for (Product s : listProducts) clone.add(s);

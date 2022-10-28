@@ -69,7 +69,7 @@ public class ProductManagerController {
     }
 
     public String sortByDate() throws Exception {
-        ArrayList<Product> list = productManager.returnProductList();
+        ArrayList<Product> list = productManager.getListProduct();
         list.sort(new Comparator<Product>() {
             @Override
             public int compare(Product p1, Product p2) {

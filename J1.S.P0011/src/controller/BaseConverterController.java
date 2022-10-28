@@ -1,6 +1,7 @@
 package controller;
 
 import bo.BaseConvert;
+import bo.BaseInputer;
 import entity.BaseType;
 
 public class BaseConverterController {
@@ -15,8 +16,8 @@ public class BaseConverterController {
     }
 
     public String inputNumberAndBase(int originalChoice, int convertChoice, String originalNumber) throws Exception {
-        originalType = BaseType.inputNumberAndCovertBase(originalChoice);
-        convertType = BaseType.inputNumberAndCovertBase(convertChoice);
+        originalType = BaseInputer.inputMenuAndCovertBase(originalChoice);
+        convertType = BaseInputer.inputMenuAndCovertBase(convertChoice);
         return convert.convertToOutput(originalNumber, originalType, convertType);
     }
 }

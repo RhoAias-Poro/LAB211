@@ -4,9 +4,6 @@ import controller.BaseConverterController;
 import utils.utils.Validations;
 
 public class Main {
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_RED = "\u001B[31m";
-
     public static void main(String[] args) throws Exception {
         BaseConverterController controller = new BaseConverterController();
         String menu = "Welcome to base converter\n" + "1. Binary\n" + "2. Decimal\n" + "3. Hexadecimal\n" + "4. Exit\n";
@@ -18,7 +15,7 @@ public class Main {
             if (originalType == 4) break;
             String numbString = Validations.getStringByRegex("Please enter value that you want to convert: ", "Please enter value that satisfy the base you choose", "[a-zA-Z0-9]+");
             try {
-                System.out.println(controller.inputNumberAndBase(originalType, convertType, numbString));
+                System.out.println("Return value: " + controller.inputNumberAndBase(originalType, convertType, numbString));
             } catch (Exception e) {
                 Validations.throwError(e.getMessage());
             }

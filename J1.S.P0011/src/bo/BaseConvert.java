@@ -58,14 +58,18 @@ public class BaseConvert {
     }
 
     public String convertToOutput(String numString, BaseType originalType, BaseType convertType) throws Exception {
+        numString = numString.replaceAll("^0+", "");
+        if (numString.isEmpty()) return "0";
         if (originalType.equals(convertType)) {
-            numString = numString.replaceAll("^0+", "");
-            if (numString.isEmpty()) return "0";
             return numString;
         }
         if (!checkInputByType(numString, originalType))
             throw new Exception("Please enter a valid number of the base type");
-        return decToBase(baseToDec(numString.toUpperCase(), originalType), convertType);
+        String dec = baseToDec(numString.toUpperCase(), originalType).toString();
+        if (convertType == BaseType.DEC) {
+            return dec;
+        }
+        return decToBase(new BigInteger(dec), convertType);
     }
 
 //    private String binToHex(String numString) {

@@ -41,7 +41,7 @@ public class StudentManagerController {
     }
 
     public String report() throws Exception {
-        ArrayList<Student> list = studentManager.getStudentList();
+        ArrayList<Student> list = studentManager.getListStudent();
         String ret = "";
         while (list.size() > 0) {
             ArrayList<Student.CourseName> listCourse1 = list.get(0).getCourseName();

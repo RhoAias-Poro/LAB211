@@ -16,16 +16,21 @@ public class ProductManagementInputer {
         p.setExpireDate(new SimpleDateFormat("dd/MM/yyyy").parse(Validations.getDob("Please enter expire date of product (dd/mm/yyyy): ", "Please enter date match the form dd/mm/yyyy")));
         do {
             p.setProduceDate(new SimpleDateFormat("dd/MM/yyyy").parse(Validations.getDob("Please enter manufacturre date of product (dd/mm/yyyy): ", "Please enter date match the form dd/mm/yyyy")));
-            if (p.getProduceDate().compareTo(p.getExpireDate()) <= 0) break;
-            else System.err.println("The product date must before the expire date");
+            if (p.getProduceDate().compareTo(p.getExpireDate()) <= 0) {
+                break;
+            } else {
+                System.err.println("The product date must before the expire date");
+            }
         } while (true);
         p.setCategory(Validations.getStringByRegex("Please enter category for the product: ", "Please enter character only", "[a-zA-X\s]+"));
         p.setStoreKeeper(storeKeeperInput());
         do {
             p.setReceiptDate(new SimpleDateFormat("dd/MM/yyyy").parse(Validations.getDob("Please enter reecept date of product (dd/mm/yyyy): ", "Please enter date match the form dd/mm/yyyy")));
-            if (p.getReceiptDate().compareTo(p.getProduceDate()) >= 0 && p.getReceiptDate().compareTo(p.getExpireDate()) <= 0)
+            if (p.getReceiptDate().compareTo(p.getProduceDate()) >= 0 && p.getReceiptDate().compareTo(p.getExpireDate()) <= 0) {
                 break;
-            else System.err.println("The receipt date must after produce date and before expire date");
+            } else {
+                System.err.println("The receipt date must after produce date and before expire date");
+            }
         } while (true);
         return p;
     }

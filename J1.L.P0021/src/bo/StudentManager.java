@@ -14,7 +14,9 @@ public class StudentManager {
     }
 
     public Student addStudent(Student s) throws Exception {
-        if (s == null) throw new Exception("Student cannot be null");
+        if (s == null) {
+            throw new Exception("Student cannot be null");
+        }
         student = getStudentById(s.getId());
         if (checkDuplicateCourseOnEachStudent(s.getCourseName())) {
             throw new Exception("Duplicate course in the student you enter");
@@ -53,18 +55,19 @@ public class StudentManager {
             return true;
         }
         if (studentAdd.getStudentName().equalsIgnoreCase(studentCheck.getStudentName())) {
-            if (!studentAdd.getSemester().equalsIgnoreCase(studentCheck.getSemester()) || (studentAdd.getSemester().equalsIgnoreCase(studentCheck.getSemester())
-                    && !checkDuplicateCourseOnTwoStudent(studentAdd.getCourseName(), studentCheck.getCourseName()))) {
+            if (!studentAdd.getSemester().equalsIgnoreCase(studentCheck.getSemester()) || (studentAdd.getSemester().equalsIgnoreCase(studentCheck.getSemester()) && !checkDuplicateCourseOnTwoStudent(studentAdd.getCourseName(), studentCheck.getCourseName()))) {
                 return true;
             }
         }
         return false;
     }
 
-    public ArrayList<Student> getStudentList() throws Exception {
-        if (listStudent.isEmpty()) throw new Exception("The List of students is empty");
+    public ArrayList<Student> getListStudent() throws Exception {
+        if (listStudent.isEmpty()) {
+            throw new Exception("The List of students is empty");
+        }
         ArrayList<Student> clone = new ArrayList<Student>(listStudent.size());
-        for (Student s : listStudent) clone.add(s);
+        clone.addAll(listStudent);
         return clone;
     }
 
@@ -80,15 +83,21 @@ public class StudentManager {
     }
 
     public Student updateStudent(String id, Student s) throws Exception {
-        if (s == null) throw new Exception("Student cannot be null");
+        if (s == null) {
+            throw new Exception("Student cannot be null");
+        }
         int index = searchById(id);
-        if (index != -1) return listStudent.set(index, s);
+        if (index != -1) {
+            return listStudent.set(index, s);
+        }
         throw new Exception("Student not found");
     }
 
     public Student getStudentById(String id) throws Exception {
         int index = searchById(id);
-        if (index != -1) return listStudent.get(index);
+        if (index != -1) {
+            return listStudent.get(index);
+        }
         return null;
     }
 
@@ -102,7 +111,9 @@ public class StudentManager {
 
     public ArrayList<Student> findAndSortByName(String name) throws Exception {
         ArrayList<Student> newList = new ArrayList<Student>();
-        if (listStudent.isEmpty()) throw new Exception("Student with name does not exist");
+        if (listStudent.isEmpty()) {
+            throw new Exception("Student with name does not exist");
+        }
         for (Student student : listStudent) {
             //check student have name contains input
             if (student.getStudentName().toLowerCase().contains(name.toLowerCase())) {
@@ -123,7 +134,9 @@ public class StudentManager {
 
 
     public String toString(Student s) throws Exception {
-        if (s == null) throw new Exception("Student cannot be null");
+        if (s == null) {
+            throw new Exception("Student cannot be null");
+        }
         String ret = "";
         for (int i = 0; i < s.getCourseName().size(); i++) {
             ret += s.getId() + " | " + s.getStudentName() + " | " + s.getSemester() + " | " + s.getCourseName().get(i) + "\n";
