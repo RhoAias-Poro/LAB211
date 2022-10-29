@@ -16,9 +16,9 @@ public class StoreKeeperManager {
             throw new Exception("StoreKeeper cannot be null");
         }
         if (ensureStoreKeeperExist(s)) {
-            throw new Exception("Duplicate storekepper information");
+            return listStoreKeepers.add(s);
         }
-        return listStoreKeepers.add(s);
+        throw new Exception("Duplicate storekepper information");
     }
 
     public StoreKeeper getStoreKeeperByName(String skk) throws Exception {
@@ -27,17 +27,16 @@ public class StoreKeeperManager {
                 return s;
             }
         }
-        throw new Exception("StoreKeeper not found");
+        return null;
     }
 
     public boolean ensureStoreKeeperExist(StoreKeeper storeKeeper) throws Exception {
-        if (storeKeeper == null) throw new Exception("StoreKeeper cannot be null");
-        try {
-            getStoreKeeperByName(storeKeeper.getName());
-            return true;
-        } catch (Exception e) {
-            addStoreKeeper(storeKeeper);
-            return false;
+        if (storeKeeper == null) {
+            throw new Exception("StoreKeeper cannot be null");
         }
+        if (getStoreKeeperByName(storeKeeper.getName()) == null) {
+            return true;
+        }
+        return false;
     }
 }

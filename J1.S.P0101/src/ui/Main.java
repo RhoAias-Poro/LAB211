@@ -54,7 +54,7 @@ public class Main {
                     break;
                 case 5:
                     try {
-                        System.out.println(controller.sortEmployee());
+                        System.out.println(controller.sortEmployeeBySalary());
                     } catch (Exception e) {
                         Validations.throwError(e.getMessage());
                     }

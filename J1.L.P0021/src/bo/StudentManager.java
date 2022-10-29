@@ -39,9 +39,9 @@ public class StudentManager {
     }
 
     private boolean checkDuplicateCourseOnTwoStudent(ArrayList<Student.CourseName> students1, ArrayList<Student.CourseName> students2) {
-        for (Student.CourseName name : students1) {
-            for (Student.CourseName courseName : students2) {
-                if (name.equals(courseName)) {
+        for (Student.CourseName courseNameStu1 : students1) {
+            for (Student.CourseName courseNameStu2 : students2) {
+                if (courseNameStu1.equals(courseNameStu2)) {
                     return true;
                 }
             }

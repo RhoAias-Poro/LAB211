@@ -69,7 +69,7 @@ public class ProductManagerController {
             case SEARCH_BY_RECIPTDATE ->
                     receiptDate = new SimpleDateFormat("dd/MM/yyyy").parse(Validations.getDob("Please enter receipt date of product (dd/mm/yyyy): ", "Please enter date match the form dd/mm/yyyy"));
         }
-        list = productManager.getProducts(name, category, storeKeeper, receiptDate);
+        list = productManager.getProductsByChoice(name, category, storeKeeper, receiptDate);
         for (Product product : list) {
             ret += productManager.toString(product);
         }

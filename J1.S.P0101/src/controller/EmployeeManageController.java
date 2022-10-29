@@ -35,21 +35,21 @@ public class EmployeeManageController {
 
     public String findEmployeeByName(String name) throws Exception {
         ArrayList<Employee> foundList = manager.findEmployeeWithName(name);
-        return printList(foundList);
+        return printListEmployees(foundList);
     }
 
-    public String sortEmployee() throws Exception {
-        ArrayList<Employee> employeeList = manager.returnEmployeeList();
+    public String sortEmployeeBySalary() throws Exception {
+        ArrayList<Employee> employeeList = manager.returnListEmployees();
         employeeList.sort(new Comparator<Employee>() {
             @Override
             public int compare(Employee o1, Employee o2) {
                 return o1.getSalary() - o2.getSalary();
             }
         });
-        return printList(employeeList);
+        return printListEmployees(employeeList);
     }
 
-    private String printList(ArrayList<Employee> employeeList) throws Exception {
+    private String printListEmployees(ArrayList<Employee> employeeList) throws Exception {
         String ret = "";
         for (Employee emp : employeeList) {
             ret += manager.toString(emp);

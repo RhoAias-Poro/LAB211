@@ -22,7 +22,7 @@ public class StudentManagerController {
         return student;
     }
 
-    public String findAndSort(String name) throws Exception {
+    public String findAndSortByName(String name) throws Exception {
         ArrayList<Student> foundList = studentManager.findAndSortByName(name);
         String ret = "";
         for (Student s : foundList) {

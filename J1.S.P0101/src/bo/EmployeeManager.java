@@ -76,7 +76,7 @@ public class EmployeeManager {
         return foundList;
     }
 
-    public ArrayList<Employee> returnEmployeeList() throws Exception {
+    public ArrayList<Employee> returnListEmployees() throws Exception {
         if (listEmployees.isEmpty()) {
             throw new Exception("The List of students is empty");
         }

@@ -62,7 +62,7 @@ public class ProductManager {
 //        throw new Exception("Product doesn't exist");
 //    }
 
-    public ArrayList<Product> getProducts(String name, String category, StoreKeeper s, Date receiptDate) throws Exception {
+    public ArrayList<Product> getProductsByChoice(String name, String category, StoreKeeper s, Date receiptDate) throws Exception {
         ArrayList<Product> ret = new ArrayList<Product>();
         for (Product p : listProducts) {
             if (name != null && p.getName().toLowerCase().contains(name.toLowerCase())) {

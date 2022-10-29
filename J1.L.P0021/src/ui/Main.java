@@ -41,7 +41,7 @@ public class Main {
                 case 2:
                     String input = Validations.getStringByRegex("Please enter a name you want to search: ", "Please enter character only", "[a-zA-Z\s]");
                     try {
-                        System.out.println(controller.findAndSort(input));
+                        System.out.println(controller.findAndSortByName(input));
                     } catch (Exception e) {
                         Validations.throwError(e.getMessage());
                     }
