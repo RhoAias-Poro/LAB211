@@ -16,7 +16,9 @@ public class ProductManagerController {
     private final int SEARCH_BY_NAME = 1;
     private final int SEARCH_BY_CATEGORY = 2;
     private final int SEARCH_BY_STOREKEPPER = 3;
-    private final int SEARCH_BY_RECIPTDATE = 4;
+    private final int SEARCH_BY_RECIPT_DATE = 4;
+    private final int SORT_BY_EXPIRE_DATE = 1;
+    private final int SORT_BY_DATE_OF_MANUFACTURE = 2;
     private ProductManager productManager;
     private ProductManagementInputer input;
     private StoreKeeperManager storeKeeperManager;
@@ -66,8 +68,9 @@ public class ProductManagerController {
                     category = Validations.getStringByRegex("Please enter category for the product: ", "Please enter character only", "[a-zA-X\s]+");
             case SEARCH_BY_STOREKEPPER ->
                     storeKeeper.setName(Validations.getStringByRegex("Please enter name of the seller: ", "Please enter character only", "[a-zA-X\s]+"));
-            case SEARCH_BY_RECIPTDATE ->
+            case SEARCH_BY_RECIPT_DATE ->
                     receiptDate = new SimpleDateFormat("dd/MM/yyyy").parse(Validations.getDob("Please enter receipt date of product (dd/mm/yyyy): ", "Please enter date match the form dd/mm/yyyy"));
+            default -> throw new Exception("Invalid choice to search!!!!!");
         }
         list = productManager.getProductsByChoice(name, category, storeKeeper, receiptDate);
         for (Product product : list) {
@@ -76,18 +79,37 @@ public class ProductManagerController {
         return ret;
     }
 
-    public String sortByDate() throws Exception {
+    public String sortByDate(int choice) throws Exception {
         ArrayList<Product> list = productManager.getListProduct();
-        list.sort(new Comparator<Product>() {
-            @Override
-            public int compare(Product p1, Product p2) {
-                return (int) ((p1.getExpireDate().getTime() - p1.getProduceDate().getTime()) - (p2.getExpireDate().getTime() - p2.getProduceDate().getTime()));
-            }
-        });
+        switch (choice) {
+            case SORT_BY_EXPIRE_DATE -> list = sortByExpireDate(list);
+            case SORT_BY_DATE_OF_MANUFACTURE -> list = sortByDOM(list);
+            default -> throw new Exception("Invalid choice to sort!!!!!");
+        }
         String ret = "";
         for (Product p : list) {
             ret += productManager.toString(p);
         }
         return ret;
+    }
+
+    private ArrayList<Product> sortByExpireDate(ArrayList<Product> list) {
+        list.sort(new Comparator<Product>() {
+            @Override
+            public int compare(Product p1, Product p2) {
+                return (int) (p1.getExpireDate().getTime() - p2.getExpireDate().getTime());
+            }
+        });
+        return list;
+    }
+
+    private ArrayList<Product> sortByDOM(ArrayList<Product> list) {
+        list.sort(new Comparator<Product>() {
+            @Override
+            public int compare(Product p1, Product p2) {
+                return (int) (p1.getProduceDate().getTime() - p2.getProduceDate().getTime());
+            }
+        });
+        return list;
     }
 }

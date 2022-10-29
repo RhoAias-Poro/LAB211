@@ -10,20 +10,10 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        String menu = "Welcome to the product management system\n" +
-                "1. Add StoreKeeper\n" +
-                "2. Add Product\n" +
-                "3. Update Product\n" +
-                "4. Search Product\n" +
-                "5. Sort Product by Expiry date, Date of manufacturer\n" +
-                "6. Exit";
-        String searchByChoice = "Element you want to search from\n" +
-                "1. Name\n" +
-                "2. Category\n" +
-                "3. StoreKeeper\n" +
-                "4. ReceiptDate\n" +
-                "Please enter: ";
-        int choice = 0, id = 0, searchChoice = 0;
+        String menu = "Welcome to the product management system\n" + "1. Add StoreKeeper\n" + "2. Add Product\n" + "3. Update Product\n" + "4. Search Product\n" + "5. Sort Product by Expiry date, Date of manufacturer\n" + "6. Exit";
+        String searchByChoice = "Element you want to search from\n" + "1. Name\n" + "2. Category\n" + "3. StoreKeeper\n" + "4. ReceiptDate\n" + "Please enter: ";
+        String sortByDate = "Type of date to sort by:\n" + "1. Expiry date\n" + "2. Date of manufacturer\n" + "Please enter: ";
+        int choice = 0, id = 0, searchChoice = 0, sortChoice = 0;
         ProductManagerController controller = new ProductManagerController();
         Product product = new Product();
         StoreKeeper storeKeeper = new StoreKeeper();
@@ -66,8 +56,9 @@ public class Main {
                     }
                     break;
                 case 5:
+                    sortChoice = Validations.getInt(sortByDate, "Please enter number only", "Please enter number on the menu", 1, 2);
                     try {
-                        System.out.println(controller.sortByDate());
+                        System.out.println(controller.sortByDate(sortChoice));
                     } catch (Exception e) {
                         Validations.throwError(e.getMessage());
                     }

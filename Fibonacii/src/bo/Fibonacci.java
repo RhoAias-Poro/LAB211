@@ -17,11 +17,10 @@ public class Fibonacci {
         BigInteger fibValue;
         if (array.size() > n) {
             return array.get(n);
-        } else {
-            fibValue = getFibByIndex(n - 1).add(getFibByIndex(n - 2));
-            array.add(fibValue);
-            return fibValue;
         }
+        fibValue = getFibByIndex(n - 1).add(getFibByIndex(n - 2));
+        array.add(fibValue);
+        return fibValue;
     }
 
     public BigInteger[] getNFiboNum(int num) {
