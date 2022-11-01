@@ -1,7 +1,5 @@
 package entity;
 
-import java.util.ArrayList;
-
 public class Employee {
     private int id;
     private String firstName;
@@ -109,6 +107,10 @@ public class Employee {
 
     public void setAgency(String agency) {
         this.agency = agency;
+    }
+
+    public String toString() {
+        return (getId() + " | " + getFirstName() + " | " + getLastName() + " | " + getPhone() + " | " + getEmail() + " | " + getAddress() + " | " + getDob() + " | " + getSex() + " | " + getSalary() + " | " + getAgency() + "\n");
     }
 
 }

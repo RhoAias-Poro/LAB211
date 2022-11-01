@@ -14,54 +14,28 @@ public class Main {
         do {
             System.out.println(menu);
             choice = IntegerUtils.getOption();
-            switch (choice) {
-                case 1:
-                    while (true) {
-                        try {
-                            employee = controller.addEmployee();
-                            break;
-                        } catch (Exception e) {
-                            Validations.throwError(e.getMessage());
-                        }
+            try {
+                switch (choice) {
+                    case 1 -> {
+                        employee = controller.addEmployee();
+                        System.out.println("Add employee complete");
                     }
-                    System.out.println("Add employee complete");
-                    break;
-                case 2:
-                    id = Validations.getInt("Enter employee ID that you want to update: ", "Please enter number only", "Please enter positive number", 0, Integer.MAX_VALUE);
-                    try {
-                        employee = controller.updateEmployee(id);
+                    case 2 -> {
+                        employee = controller.updateEmployee();
                         System.out.println("Update employee complete");
-                    } catch (Exception e) {
-                        Validations.throwError(e.getMessage());
                     }
-                    break;
-                case 3:
-                    id = Validations.getInt("Enter employee ID that you want to delete: ", "Please enter number only", "Please enter positive number", 0, Integer.MAX_VALUE);
-                    try {
-                        employee = controller.deleteEmployee(id);
+                    case 3 -> {
+                        employee = controller.deleteEmployee();
                         System.out.println("Delete employee complete");
-                    } catch (Exception e) {
-                        Validations.throwError(e.getMessage());
                     }
-                    break;
-                case 4:
-                    String name = Validations.getStringByRegex("Enter employee name that you want to find: ", "Please enter character only", "[a-zA-Z\s]+");
-                    try {
-                        System.out.println(controller.findEmployeeByName(name));
-                    } catch (Exception e) {
-                        Validations.throwError(e.getMessage());
+                    case 4 -> {
+                        System.out.println(controller.findEmployeeByName());
                     }
-                    break;
-                case 5:
-                    try {
-                        System.out.println(controller.sortEmployeeBySalary());
-                    } catch (Exception e) {
-                        Validations.throwError(e.getMessage());
-                    }
-                    break;
-                default:
-                    choice = 6;
-                    break;
+                    case 5 -> System.out.println(controller.sortEmployeeBySalary());
+                    default -> choice = 6;
+                }
+            } catch (Exception e) {
+                Validations.throwError(e.getMessage());
             }
         } while (choice != 6);
     }

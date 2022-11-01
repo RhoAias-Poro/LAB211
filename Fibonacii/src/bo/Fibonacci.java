@@ -5,10 +5,9 @@ import java.util.ArrayList;
 
 public class Fibonacci {
 
-    private static ArrayList<BigInteger> array;
+    private static ArrayList<BigInteger> array = new ArrayList<BigInteger>();
 
     public Fibonacci() {
-        array = new ArrayList<BigInteger>();
         array.add(BigInteger.ZERO);
         array.add(BigInteger.ONE);
     }

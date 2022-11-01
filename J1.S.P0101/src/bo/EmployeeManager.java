@@ -23,9 +23,6 @@ public class EmployeeManager {
     }
 
     public int searchById(int id) throws Exception {
-        if (id < 0) {
-            throw new Exception("ID cannot be negative");
-        }
         int index = 0;
         for (Employee employee : listEmployees) {
             if (employee.getId() == id) {
@@ -76,21 +73,19 @@ public class EmployeeManager {
         return foundList;
     }
 
-    public ArrayList<Employee> returnListEmployees() throws Exception {
+    public ArrayList<Employee> getListEmployees() throws Exception {
         if (listEmployees.isEmpty()) {
             throw new Exception("The List of students is empty");
         }
         ArrayList<Employee> clone = new ArrayList<Employee>(listEmployees.size());
-        for (Employee s : listEmployees) {
-            clone.add(s);
-        }
+        clone.addAll(listEmployees);
         return clone;
     }
 
-    public String toString(Employee emp) throws Exception {
-        if (emp == null) {
-            throw new Exception("Employee cannot be null");
-        }
-        return (emp.getId() + " | " + emp.getFirstName() + " | " + emp.getLastName() + " | " + emp.getPhone() + " | " + emp.getEmail() + " | " + emp.getAddress() + " | " + emp.getDob() + " | " + emp.getSex() + " | " + emp.getSalary() + " | " + emp.getAgency() + "\n");
-    }
+//    public String toString(Employee emp) throws Exception {
+//        if (emp == null) {
+//            throw new Exception("Employee cannot be null");
+//        }
+//        return (emp.getId() + " | " + emp.getFirstName() + " | " + emp.getLastName() + " | " + emp.getPhone() + " | " + emp.getEmail() + " | " + emp.getAddress() + " | " + emp.getDob() + " | " + emp.getSex() + " | " + emp.getSalary() + " | " + emp.getAgency() + "\n");
+//    }
 }

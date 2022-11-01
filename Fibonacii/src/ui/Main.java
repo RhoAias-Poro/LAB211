@@ -13,5 +13,8 @@ public class Main {
         Fibonacci obj = new Fibonacci();
         BigInteger[] result = obj.getNFiboNum(length);
         ArrayUtils.printArrayOfBigInteger(result);
+        Fibonacci obj1 = new Fibonacci();
+        BigInteger[] result1 = obj1.getNFiboNum(length);
+        ArrayUtils.printArrayOfBigInteger(result1);
     }
 }

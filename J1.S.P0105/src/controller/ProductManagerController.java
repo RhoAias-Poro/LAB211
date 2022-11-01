@@ -48,7 +48,7 @@ public class ProductManagerController {
     public Product updateProduct(int id) throws Exception {
         product = productManager.getProductById(id);
         if (product == null) {
-            throw new Exception(("Can't found the product "));
+            throw new Exception("Can't found the product ");
         }
         product = input.productInput();
         return productManager.updateProduct(id, product);
@@ -56,7 +56,7 @@ public class ProductManagerController {
 
     public String searchByChoice(int choice) throws Exception {
         ArrayList<Product> list;
-        String ret = "";
+        StringBuilder ret = new StringBuilder();
         Date receiptDate = null;
         String name = null;
         String category = null;
@@ -74,40 +74,35 @@ public class ProductManagerController {
         }
         list = productManager.getProductsByChoice(name, category, storeKeeper, receiptDate);
         for (Product product : list) {
-            ret += productManager.toString(product);
+            ret.append(productManager.toString(product));
         }
-        return ret;
+        return ret.toString();
     }
 
     public String sortByDate(int choice) throws Exception {
         ArrayList<Product> list = productManager.getListProduct();
         switch (choice) {
-            case SORT_BY_EXPIRE_DATE -> list = sortByExpireDate(list);
-            case SORT_BY_DATE_OF_MANUFACTURE -> list = sortByDOM(list);
+            case SORT_BY_EXPIRE_DATE -> list = sort(list, true);
+            case SORT_BY_DATE_OF_MANUFACTURE -> list = sort(list, false);
             default -> throw new Exception("Invalid choice to sort!!!!!");
         }
-        String ret = "";
+        StringBuilder ret = new StringBuilder();
         for (Product p : list) {
-            ret += productManager.toString(p);
+            ret.append(productManager.toString(p));
         }
-        return ret;
+        return ret.toString();
     }
 
-    private ArrayList<Product> sortByExpireDate(ArrayList<Product> list) {
+    private ArrayList<Product> sort(ArrayList<Product> list, boolean isExpireDate) {
         list.sort(new Comparator<Product>() {
             @Override
             public int compare(Product p1, Product p2) {
-                return (int) (p1.getExpireDate().getTime() - p2.getExpireDate().getTime());
-            }
-        });
-        return list;
-    }
+                if (isExpireDate) {
+                    return (int) (p1.getExpireDate().getTime() - p2.getExpireDate().getTime());
 
-    private ArrayList<Product> sortByDOM(ArrayList<Product> list) {
-        list.sort(new Comparator<Product>() {
-            @Override
-            public int compare(Product p1, Product p2) {
-                return (int) (p1.getProduceDate().getTime() - p2.getProduceDate().getTime());
+                } else {
+                    return (int) (p1.getProduceDate().getTime() - p2.getProduceDate().getTime());
+                }
             }
         });
         return list;

@@ -89,9 +89,7 @@ public class ProductManager {
             throw new Exception("The product list is empty");
         }
         ArrayList<Product> clone = new ArrayList<Product>(listProducts.size());
-        for (Product s : listProducts) {
-            clone.add(s);
-        }
+        clone.addAll(listProducts);
         return clone;
     }
 

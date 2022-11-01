@@ -21,7 +21,7 @@ public class StoreKeeperManager {
         throw new Exception("Duplicate storekepper information");
     }
 
-    public StoreKeeper getStoreKeeperByName(String skk) throws Exception {
+    private StoreKeeper getStoreKeeperByName(String skk) throws Exception {
         for (StoreKeeper s : listStoreKeepers) {
             if (s.getName().equalsIgnoreCase(skk)) {
                 return s;

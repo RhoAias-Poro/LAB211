@@ -3,6 +3,7 @@ package controller;
 import bo.StudentManager;
 import bo.StudentsInputer;
 import entity.Student;
+import utils.Validations;
 
 import java.util.ArrayList;
 
@@ -18,32 +19,36 @@ public class StudentManagerController {
 
     public Student addStudent() throws Exception {
         student = studentsInputer.inputInformation();
-        studentManager.addStudent(student);
-        return student;
-    }
-
-    public String findAndSortByName(String name) throws Exception {
-        ArrayList<Student> foundList = studentManager.findAndSortByName(name);
-        String ret = "";
-        for (Student s : foundList) {
-            ret += studentManager.toString(s);
+        if (studentManager.addStudent(student)) {
+            return student;
         }
-        return ret;
+        throw new Exception("Can't add student");
     }
 
-    public Student updateStudent(String id) throws Exception {
-        student = studentManager.getStudentById(id);
+    public String findAndSortByName() throws Exception {
+        String name = Validations.getStringByRegex("Please enter a name you want to search: ", "Please enter character only", "[a-zA-Z\s]");
+        ArrayList<Student> foundList = studentManager.findAndSortByName(name);
+        StringBuilder ret = new StringBuilder();
+        for (Student s : foundList) {
+            ret.append(s.toString());
+        }
+        return ret.toString();
+    }
+
+    public Student updateStudent() throws Exception {
+        String id = Validations.getStringByRegex("Enter Student ID that you want to manipulate: ", "Please enter valid character", "[a-zA-Z0-9]+");
         student = studentsInputer.inputInformation();
         return studentManager.updateStudent(id, student);
     }
 
-    public Student removeStudent(String id) throws Exception {
+    public Student removeStudent() throws Exception {
+        String id = Validations.getStringByRegex("Enter Student ID that you want to manipulate: ", "Please enter valid character", "[a-zA-Z0-9]+");
         return studentManager.deleteStudent(id);
     }
 
     public String report() throws Exception {
         ArrayList<Student> list = studentManager.getListStudent();
-        String ret = "";
+        StringBuilder ret = new StringBuilder();
         while (list.size() > 0) {
             ArrayList<Student.CourseName> listCourse1 = list.get(0).getCourseName();
             int countJava = 0;
@@ -64,10 +69,10 @@ public class StudentManagerController {
                     list.remove(list.get(j));
                 }
             }
-            ret += list.get(0).getStudentName() + " | " + "Java" + "  | " + countJava + "\n" + list.get(0).getStudentName() + " | " + "Net" + "   | " + countNet + "\n" + list.get(0).getStudentName() + " | " + "Cpp" + "   | " + countCpp + "\n";
+            ret.append(list.get(0).getStudentName()).append(" | ").append("Java").append("  | ").append(countJava).append("\n").append(list.get(0).getStudentName()).append(" | ").append("Net").append("   | ").append(countNet).append("\n").append(list.get(0).getStudentName()).append(" | ").append("Cpp").append("   | ").append(countCpp).append("\n");
             list.remove(list.get(0));
         }
-        return ret;
+        return ret.toString();
     }
 
     private int countCourse(ArrayList<Student.CourseName> list, int course) {

@@ -17,11 +17,11 @@ public class StudentManager {
         if (s == null) {
             throw new Exception("Student cannot be null");
         }
-        student = getStudentById(s.getId());
         if (checkDuplicateCourseOnEachStudent(s.getCourseName())) {
             throw new Exception("Duplicate course in the student you enter");
         }
-        if (checkDuplicateStudentInformation(s, student)) {
+        student = getStudentById(s.getId());
+        if (student == null || checkNonDuplicateStudentInformation(s, student)) {
             return listStudent.add(s);
         }
         throw new Exception("There has a student with this information");
@@ -49,10 +49,7 @@ public class StudentManager {
         return false;
     }
 
-    private boolean checkDuplicateStudentInformation(Student studentAdd, Student studentCheck) {
-        if (studentCheck == null) {
-            return true;
-        }
+    private boolean checkNonDuplicateStudentInformation(Student studentAdd, Student studentCheck) {
         if (studentAdd.getStudentName().equalsIgnoreCase(studentCheck.getStudentName())) {
             if (!studentAdd.getSemester().equalsIgnoreCase(studentCheck.getSemester()) || (studentAdd.getSemester().equalsIgnoreCase(studentCheck.getSemester()) && !checkDuplicateCourseOnTwoStudent(studentAdd.getCourseName(), studentCheck.getCourseName()))) {
                 return true;
@@ -132,14 +129,14 @@ public class StudentManager {
     }
 
 
-    public String toString(Student s) throws Exception {
-        if (s == null) {
-            throw new Exception("Student cannot be null");
-        }
-        String ret = "";
-        for (int i = 0; i < s.getCourseName().size(); i++) {
-            ret += s.getId() + " | " + s.getStudentName() + " | " + s.getSemester() + " | " + s.getCourseName().get(i) + "\n";
-        }
-        return ret;
-    }
+//    public String toString(Student s) throws Exception {
+//        if (s == null) {
+//            throw new Exception("Student cannot be null");
+//        }
+//        StringBuilder ret = new StringBuilder();
+//        for (int i = 0; i < s.getCourseName().size(); i++) {
+//            ret.append(s.getId()).append(" | ").append(s.getStudentName()).append(" | ").append(s.getSemester()).append(" | ").append(s.getCourseName().get(i)).append("\n");
+//        }
+//        return ret.toString();
+//    }
 }

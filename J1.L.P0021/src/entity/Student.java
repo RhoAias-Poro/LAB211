@@ -51,6 +51,15 @@ public class Student {
         this.course.add(course);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder ret = new StringBuilder();
+        for (int i = 0; i < getCourseName().size(); i++) {
+            ret.append(getId()).append(" | ").append(getStudentName()).append(" | ").append(getSemester()).append(" | ").append(getCourseName().get(i)).append("\n");
+        }
+        return ret.toString();
+    }
+
     public enum CourseName {
         Java, Net, Cpp;
 
