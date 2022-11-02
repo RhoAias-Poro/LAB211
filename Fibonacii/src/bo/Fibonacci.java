@@ -8,8 +8,12 @@ public class Fibonacci {
     private static ArrayList<BigInteger> array = new ArrayList<BigInteger>();
 
     public Fibonacci() {
-        array.add(BigInteger.ZERO);
-        array.add(BigInteger.ONE);
+        if (!array.contains(BigInteger.ZERO)) {
+            array.add(BigInteger.ZERO);
+        }
+        if (!array.contains(BigInteger.ONE)) {
+            array.add(BigInteger.ONE);
+        }
     }
 
     private BigInteger getFibByIndex(int n) {
@@ -22,7 +26,10 @@ public class Fibonacci {
         return fibValue;
     }
 
-    public BigInteger[] getNFiboNum(int num) {
+    public BigInteger[] getNFiboNum(int num) throws Exception {
+        if (num <= 0) {
+            throw new Exception("Please Enter Positive Integer");
+        }
         BigInteger[] arrayFib = new BigInteger[num];
         for (int i = 0; i < num; i++) {
             arrayFib[i] = getFibByIndex(i);

@@ -6,9 +6,10 @@ import utils.Validations;
 public class StudentsInputer {
 
     String courseInfo = "Course Information: \n1. Java\n2. Net\n3. Cpp\n";
+    private Student s;
 
     public Student inputInformation() {
-        Student s = new Student();
+        s = new Student();
         int i = 0;
         s.setId(Validations.getStringByRegex("Enter Student ID: ", "Please enter valid character", "[a-zA-Z0-9]+"));
         s.setStudentName(Validations.getStringByRegex("Enter Name: ", "Please enter character only!", "[A-Za-z\s]+"));

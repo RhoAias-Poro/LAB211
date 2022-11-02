@@ -2,19 +2,22 @@ package ui;
 
 import bo.Fibonacci;
 import utils.ArrayUtils;
-import utils.IntegerUtils;
+import utils.Validations;
 
 import java.math.BigInteger;
 
 public class Main {
-    public static void main(String[] args) {
-        System.out.print("Enter the length of fibonacci you want: ");
-        int length = IntegerUtils.inputNumberOfArray();
+    public static void main(String[] args) throws Exception {
+        int length = Validations.getInt("Please enter the length of fibonacci you want: ", "Please enter number only", "Please enter a number start from 1", 1, Integer.MAX_VALUE);
         Fibonacci obj = new Fibonacci();
-        BigInteger[] result = obj.getNFiboNum(length);
-        ArrayUtils.printArrayOfBigInteger(result);
-        Fibonacci obj1 = new Fibonacci();
-        BigInteger[] result1 = obj1.getNFiboNum(length);
-        ArrayUtils.printArrayOfBigInteger(result1);
+        try {
+            BigInteger[] result = obj.getNFiboNum(length);
+            ArrayUtils.printArrayOfBigInteger(result);
+        } catch (Exception e) {
+            Validations.throwError(e.getMessage());
+        }
+//        Fibonacci obj1 = new Fibonacci();
+//        BigInteger[] result1 = obj1.getNFiboNum(length);
+//        ArrayUtils.printArrayOfBigInteger(result1);
     }
 }

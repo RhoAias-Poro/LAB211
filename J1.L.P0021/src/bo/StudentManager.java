@@ -1,9 +1,11 @@
 package bo;
 
 import entity.Student;
+import entity.StudentReport;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 
 public class StudentManager {
     private ArrayList<Student> listStudent;
@@ -128,15 +130,20 @@ public class StudentManager {
         return newList;
     }
 
-
-//    public String toString(Student s) throws Exception {
-//        if (s == null) {
-//            throw new Exception("Student cannot be null");
-//        }
-//        StringBuilder ret = new StringBuilder();
-//        for (int i = 0; i < s.getCourseName().size(); i++) {
-//            ret.append(s.getId()).append(" | ").append(s.getStudentName()).append(" | ").append(s.getSemester()).append(" | ").append(s.getCourseName().get(i)).append("\n");
-//        }
-//        return ret.toString();
-//    }
+    public HashMap<String, StudentReport> report() {
+        HashMap<String, StudentReport> ret = new HashMap<>();
+        for (Student s : listStudent) {
+            ArrayList<Student.CourseName> courseName = s.getCourseName();
+            for (Student.CourseName course : courseName) {
+                String key = s.getId() + "|" + course;
+                StudentReport sr = ret.get(key);
+                if (sr == null) {
+                    sr = new StudentReport(s.getId(), s.getStudentName(), course.toString(), 0);
+                    ret.put(key, sr);
+                }
+                sr.setCount(sr.getCount() + 1);
+            }
+        }
+        return ret;
+    }
 }
