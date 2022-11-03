@@ -4,25 +4,25 @@ public class StudentReport {
     private String code;
     private String name;
     private String course;
-    private int count;
+    private int totalCourse;
 
-    public StudentReport(String code, String name, String course, int count) {
+    public StudentReport(String code, String name, String course, int totalCourse) {
         this.code = code;
         this.name = name;
         this.course = course;
-        this.count = count;
+        this.totalCourse = totalCourse;
     }
 
-    public int getCount() {
-        return count;
+    public int getTotalCourse() {
+        return totalCourse;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setTotalCourse(int totalCourse) {
+        this.totalCourse = totalCourse;
     }
 
     @Override
     public String toString() {
-        return this.name + " | " + this.course + " | " + this.count + "\n";
+        return this.name + " | " + this.course + " | " + this.totalCourse + "\n";
     }
 }

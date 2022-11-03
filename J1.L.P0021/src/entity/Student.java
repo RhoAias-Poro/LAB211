@@ -53,40 +53,23 @@ public class Student {
 
     @Override
     public String toString() {
-        StringBuilder ret = new StringBuilder();
+        StringBuilder ret = new StringBuilder(getId() + " | " + getStudentName() + " | " + getSemester());
         for (int i = 0; i < getCourseName().size(); i++) {
-            ret.append(getId()).append(" | ").append(getStudentName()).append(" | ").append(getSemester()).append(" | ").append(getCourseName().get(i)).append("\n");
+            ret.append(" | ").append(getCourseName().get(i));
         }
-        return ret.toString();
+        return ret.toString().toString();
     }
 
     public enum CourseName {
         Java, Net, Cpp;
 
         public static CourseName getTypeByInt(int type) {
-            switch (type) {
-                case 1:
-                    return Java;
-                case 2:
-                    return Net;
-                case 3:
-                    return Cpp;
-                default:
-                    throw new AssertionError();
-            }
-        }
-
-        public int getIntType() {
-            switch (this) {
-                case Java:
-                    return 1;
-                case Net:
-                    return 2;
-                case Cpp:
-                    return 3;
-                default:
-                    throw new AssertionError();
-            }
+            return switch (type) {
+                case 1 -> Java;
+                case 2 -> Net;
+                case 3 -> Cpp;
+                default -> throw new AssertionError();
+            };
         }
     }
 }

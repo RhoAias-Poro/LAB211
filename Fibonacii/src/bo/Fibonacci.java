@@ -8,10 +8,8 @@ public class Fibonacci {
     private static ArrayList<BigInteger> array = new ArrayList<BigInteger>();
 
     public Fibonacci() {
-        if (!array.contains(BigInteger.ZERO)) {
-            array.add(BigInteger.ZERO);
-        }
         if (!array.contains(BigInteger.ONE)) {
+            array.add(BigInteger.ONE);
             array.add(BigInteger.ONE);
         }
     }

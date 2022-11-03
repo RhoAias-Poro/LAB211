@@ -1,11 +1,12 @@
 package bo;
 
 import entity.Student;
+import entity.Student.CourseName;
 import entity.StudentReport;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class StudentManager {
     private ArrayList<Student> listStudent;
@@ -29,7 +30,7 @@ public class StudentManager {
         throw new Exception("There has a student with this information");
     }
 
-    private boolean checkDuplicateCourseOnEachStudent(ArrayList<Student.CourseName> listCourse) {
+    private boolean checkDuplicateCourseOnEachStudent(ArrayList<CourseName> listCourse) {
         for (int i = 0; i < listCourse.size(); i++) {
             for (int j = i + 1; j < listCourse.size(); j++) {
                 if (listCourse.get(i).equals(listCourse.get(j))) {
@@ -40,9 +41,9 @@ public class StudentManager {
         return false;
     }
 
-    private boolean checkDuplicateCourseOnTwoStudent(ArrayList<Student.CourseName> students1, ArrayList<Student.CourseName> students2) {
-        for (Student.CourseName courseNameStu1 : students1) {
-            for (Student.CourseName courseNameStu2 : students2) {
+    private boolean checkDuplicateCourseOnTwoStudent(ArrayList<CourseName> students1, ArrayList<CourseName> students2) {
+        for (CourseName courseNameStu1 : students1) {
+            for (CourseName courseNameStu2 : students2) {
                 if (courseNameStu1.equals(courseNameStu2)) {
                     return true;
                 }
@@ -58,15 +59,6 @@ public class StudentManager {
             }
         }
         return false;
-    }
-
-    public ArrayList<Student> getListStudent() throws Exception {
-        if (listStudent.isEmpty()) {
-            throw new Exception("The List of students is empty");
-        }
-        ArrayList<Student> clone = new ArrayList<Student>(listStudent.size());
-        clone.addAll(listStudent);
-        return clone;
     }
 
     private int searchById(String id) {
@@ -88,10 +80,10 @@ public class StudentManager {
         if (index != -1) {
             return listStudent.set(index, s);
         }
-        throw new Exception("Student not found");
+        throw new Exception("Student doesn't exist to update");
     }
 
-    public Student getStudentById(String id) throws Exception {
+    public Student getStudentById(String id) {
         int index = searchById(id);
         if (index != -1) {
             return listStudent.get(index);
@@ -104,14 +96,11 @@ public class StudentManager {
         if (index != -1) {
             return listStudent.remove(index);
         }
-        throw new Exception("Student doesn't exist");
+        throw new Exception("Student doesn't exist to delete");
     }
 
-    public ArrayList<Student> findAndSortByName(String name) throws Exception {
+    public ArrayList<Student> findAndSortByName(String name) {
         ArrayList<Student> newList = new ArrayList<Student>();
-        if (listStudent.isEmpty()) {
-            throw new Exception("Student with name does not exist");
-        }
         for (Student student : listStudent) {
             //check student have name contains input
             if (student.getStudentName().toLowerCase().contains(name.toLowerCase())) {
@@ -130,20 +119,20 @@ public class StudentManager {
         return newList;
     }
 
-    public HashMap<String, StudentReport> report() {
-        HashMap<String, StudentReport> ret = new HashMap<>();
-        for (Student s : listStudent) {
-            ArrayList<Student.CourseName> courseName = s.getCourseName();
-            for (Student.CourseName course : courseName) {
-                String key = s.getId() + "|" + course;
-                StudentReport sr = ret.get(key);
-                if (sr == null) {
-                    sr = new StudentReport(s.getId(), s.getStudentName(), course.toString(), 0);
-                    ret.put(key, sr);
+    public TreeMap<String, StudentReport> reportList() {
+        TreeMap<String, StudentReport> result = new TreeMap<>();
+        for (Student student : listStudent) {
+            ArrayList<CourseName> courseNames = student.getCourseName();
+            for (CourseName course : courseNames) {
+                String key = student.getId() + "|" + course;
+                StudentReport report = result.get(key);
+                if (report == null) {
+                    report = new StudentReport(student.getId(), student.getStudentName(), course.toString(), 0);
+                    result.put(key, report);
                 }
-                sr.setCount(sr.getCount() + 1);
+                report.setTotalCourse(report.getTotalCourse() + 1);
             }
         }
-        return ret;
+        return result;
     }
 }

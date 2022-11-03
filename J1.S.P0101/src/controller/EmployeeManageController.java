@@ -37,24 +37,30 @@ public class EmployeeManageController {
         return manager.deleteEmployee(id);
     }
 
-    public String findEmployeeByName() throws Exception {
+    public String findEmployeeByName() {
         String name = Validations.getStringByRegex("Enter employee name that you want to find: ", "Please enter character only", "[a-zA-Z\s]+");
         ArrayList<Employee> foundList = manager.findEmployeeWithName(name);
-        return printListEmployees(foundList);
+        if (foundList.size() == 0) {
+            return "Can't find employee with this name";
+        }
+        return getStringListEmployees(foundList);
     }
 
-    public String sortEmployeeBySalary() throws Exception {
+    public String sortEmployeeBySalary() {
         ArrayList<Employee> employeeList = manager.getListEmployees();
+        if (employeeList.size() == 0) {
+            return "You haven't entered any employee";
+        }
         employeeList.sort(new Comparator<Employee>() {
             @Override
             public int compare(Employee o1, Employee o2) {
                 return o1.getSalary() - o2.getSalary();
             }
         });
-        return printListEmployees(employeeList);
+        return getStringListEmployees(employeeList);
     }
 
-    private String printListEmployees(ArrayList<Employee> employeeList) throws Exception {
+    private String getStringListEmployees(ArrayList<Employee> employeeList) {
         StringBuilder ret = new StringBuilder();
         for (Employee emp : employeeList) {
             ret.append(emp.toString());

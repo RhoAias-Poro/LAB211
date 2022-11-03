@@ -4,11 +4,13 @@ import controller.StudentManagerController;
 import entity.Student;
 import utils.Validations;
 
+import java.util.ArrayList;
+
 public class Main {
 
     public static void main(String[] args) throws Exception {
         StudentManagerController controller = new StudentManagerController();
-        Student student = new Student();
+        ArrayList<Student> listAddStudent;
         int choice = 0, i = 0;
         String menu = "WELCOME TO STUDENT MANAGEMENT\n" + "\t1. Create\n" + "\t2. Find and Sort\n" + "\t3. Update/Delete\n" + "\t4. Report\n" + "\t5. Exit";
         do {
@@ -17,8 +19,9 @@ public class Main {
             try {
                 switch (choice) {
                     case 1:
+                        listAddStudent = new ArrayList<>();
                         while (true) {
-                            student = controller.addStudent();
+                            listAddStudent.add(controller.addStudent());
                             System.out.println("Add complete");
                             i++;
                             if (i >= 2) {
@@ -29,6 +32,10 @@ public class Main {
                                 }
                             }
                         }
+                        System.out.println("Students have add: ");
+                        for (Student student : listAddStudent) {
+                            System.out.println(student);
+                        }
                         break;
                     case 2:
                         System.out.println(controller.findAndSortByName());
@@ -38,9 +45,11 @@ public class Main {
                         if (uOrD.toLowerCase().equals("u")) {
                             Student updateStudent = controller.updateStudent();
                             System.out.println("Update Student successfully!");
+                            System.out.println(updateStudent);
                         } else {
                             Student deleteStudent = controller.removeStudent();
                             System.out.println("Delete Student successfully!");
+                            System.out.println(deleteStudent);
                         }
                     case 4:
                         System.out.println(controller.report());

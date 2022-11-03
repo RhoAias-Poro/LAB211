@@ -18,15 +18,18 @@ public class Main {
                 switch (choice) {
                     case 1 -> {
                         employee = controller.addEmployee();
-                        System.out.println("Add employee complete");
+                        System.out.println("Add employee complete: ");
+                        System.out.println(employee);
                     }
                     case 2 -> {
                         employee = controller.updateEmployee();
-                        System.out.println("Update employee complete");
+                        System.out.println("Update employee complete: ");
+                        System.out.println(employee);
                     }
                     case 3 -> {
                         employee = controller.deleteEmployee();
-                        System.out.println("Delete employee complete");
+                        System.out.println("Delete employee complete: ");
+                        System.out.println(employee);
                     }
                     case 4 -> {
                         System.out.println(controller.findEmployeeByName());

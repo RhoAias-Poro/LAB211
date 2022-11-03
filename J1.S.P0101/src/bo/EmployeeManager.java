@@ -41,15 +41,7 @@ public class EmployeeManager {
         if (index != -1) {
             return listEmployees.set(index, s);
         }
-        throw new Exception("Employee not found");
-    }
-
-    public Employee getEmployeeById(int id) throws Exception {
-        int index = searchById(id);
-        if (index != -1) {
-            return listEmployees.get(index);
-        }
-        return null;
+        throw new Exception("Employee doesn't exist to update");
     }
 
     public Employee deleteEmployee(int id) throws Exception {
@@ -57,35 +49,20 @@ public class EmployeeManager {
         if (index != -1) {
             return listEmployees.remove(index);
         }
-        throw new Exception("Employee doesn't exist");
+        throw new Exception("Employee doesn't exist to delete");
     }
 
-    public ArrayList<Employee> findEmployeeWithName(String name) throws Exception {
+    public ArrayList<Employee> findEmployeeWithName(String name) {
         ArrayList<Employee> foundList = new ArrayList<Employee>();
         for (Employee employee : listEmployees) {
             if (employee.getFirstName().toLowerCase().contains(name.toLowerCase()) || employee.getLastName().toLowerCase().contains(name.toLowerCase())) {
                 foundList.add(employee);
             }
         }
-        if (foundList.isEmpty()) {
-            throw new Exception("The List employee with name does not exist");
-        }
         return foundList;
     }
 
-    public ArrayList<Employee> getListEmployees() throws Exception {
-        if (listEmployees.isEmpty()) {
-            throw new Exception("The List of students is empty");
-        }
-        ArrayList<Employee> clone = new ArrayList<Employee>(listEmployees.size());
-        clone.addAll(listEmployees);
-        return clone;
+    public ArrayList<Employee> getListEmployees() {
+        return listEmployees;
     }
-
-//    public String toString(Employee emp) throws Exception {
-//        if (emp == null) {
-//            throw new Exception("Employee cannot be null");
-//        }
-//        return (emp.getId() + " | " + emp.getFirstName() + " | " + emp.getLastName() + " | " + emp.getPhone() + " | " + emp.getEmail() + " | " + emp.getAddress() + " | " + emp.getDob() + " | " + emp.getSex() + " | " + emp.getSalary() + " | " + emp.getAgency() + "\n");
-//    }
 }
