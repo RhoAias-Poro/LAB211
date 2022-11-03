@@ -23,6 +23,7 @@ public class StudentReport {
 
     @Override
     public String toString() {
-        return this.name + " | " + this.course + " | " + this.totalCourse + "\n";
+        String FORMAT_REPORT = "%-20s | %-10s | %-10s \n";
+        return String.format(FORMAT_REPORT, this.name, this.course, this.totalCourse);
     }
 }

@@ -7,7 +7,7 @@ import util.Validations;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Employee employee = new Employee();
+        Employee employee;
         EmployeeManageController controller = new EmployeeManageController();
         String menu = "Wellcome to the Employee Management System \n" + "1. Add employees\n" + "2. Update employees\n" + "3. Delete employees\n" + "4. Search employees\n" + "5. Sort employees by salary\n" + "6. Exit\n";
         int choice = 0, id = 0;

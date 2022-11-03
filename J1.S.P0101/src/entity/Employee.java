@@ -110,7 +110,8 @@ public class Employee {
     }
 
     public String toString() {
-        return (getId() + " | " + getFirstName() + " | " + getLastName() + " | " + getPhone() + " | " + getEmail() + " | " + getAddress() + " | " + getDob() + " | " + getSex() + " | " + getSalary() + " | " + getAgency() + "\n");
+        String FORMAT_OUTPUT = "%-3d | %-10s | %-5s | %-10s | %-20s | %-20s | %-10s | %-6s | %-6d | %-10s";
+        return String.format(FORMAT_OUTPUT, getId(), getFirstName(), getLastName(), getPhone(), getEmail(), getAddress(), getDob(), getSex(), getSalary(), getAgency());
     }
 
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Student {
     private String studentName;
     private String semester;
-    private ArrayList<CourseName> course = new ArrayList<CourseName>();
+    private ArrayList<CourseName> course = new ArrayList<>();
     private String id;
 
     public Student() {
@@ -53,11 +53,8 @@ public class Student {
 
     @Override
     public String toString() {
-        StringBuilder ret = new StringBuilder(getId() + " | " + getStudentName() + " | " + getSemester());
-        for (int i = 0; i < getCourseName().size(); i++) {
-            ret.append(" | ").append(getCourseName().get(i));
-        }
-        return ret.toString().toString();
+        String FORMAT_STUDENT = "%-8s | %-20s | %-10s | %-30s ";
+        return String.format(FORMAT_STUDENT, getId(), getStudentName(), getSemester(), getCourseName());
     }
 
     public enum CourseName {
