@@ -6,11 +6,19 @@ import util.IntegerUtils;
 import util.Validations;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Employee employee;
         EmployeeManageController controller = new EmployeeManageController();
-        String menu = "Wellcome to the Employee Management System \n" + "1. Add employees\n" + "2. Update employees\n" + "3. Delete employees\n" + "4. Search employees\n" + "5. Sort employees by salary\n" + "6. Exit\n";
-        int choice = 0, id = 0;
+        String menu = """
+                Welcome to the Employee Management System\s
+                1. Add employees
+                2. Update employees
+                3. Delete employees
+                4. Search employees
+                5. Sort employees by salary
+                6. Exit
+                """;
+        int choice;
         do {
             System.out.println(menu);
             choice = IntegerUtils.getOption();
@@ -23,17 +31,15 @@ public class Main {
                     }
                     case 2 -> {
                         employee = controller.updateEmployee();
-                        System.out.println("Update employee complete: ");
+                        System.out.println("Update employee complete. Employee before the update: ");
                         System.out.println(employee);
                     }
                     case 3 -> {
                         employee = controller.deleteEmployee();
-                        System.out.println("Delete employee complete: ");
+                        System.out.println("Delete employee complete. Employee have been deleted: ");
                         System.out.println(employee);
                     }
-                    case 4 -> {
-                        System.out.println(controller.findEmployeeByName());
-                    }
+                    case 4 -> System.out.println(controller.findEmployeeByName());
                     case 5 -> System.out.println(controller.sortEmployeeBySalary());
                     default -> choice = 6;
                 }

@@ -53,7 +53,7 @@ public class Student {
 
     @Override
     public String toString() {
-        String FORMAT_STUDENT = "%-8s | %-20s | %-10s | %-30s ";
+        String FORMAT_STUDENT = "%-8s | %-20s | %-10s | %-30s \n";
         return String.format(FORMAT_STUDENT, getId(), getStudentName(), getSemester(), getCourseName());
     }
 

@@ -4,25 +4,28 @@ import controller.StudentManagerController;
 import entity.Student;
 import utils.Validations;
 
-import java.util.ArrayList;
-
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         StudentManagerController controller = new StudentManagerController();
-        ArrayList<Student> listAddStudent;
         int choice = 0, i = 0;
-        String menu = "WELCOME TO STUDENT MANAGEMENT\n" + "\t1. Create\n" + "\t2. Find and Sort\n" + "\t3. Update/Delete\n" + "\t4. Report\n" + "\t5. Exit";
+        String menu = """
+                WELCOME TO STUDENT MANAGEMENT
+                \t1. Create
+                \t2. Find and Sort
+                \t3. Update/Delete
+                \t4. Report
+                \t5. Exit""";
         do {
             System.out.print(menu);
             choice = Validations.getInt("(Please choose 1 to Create, 2 to Find and Sort, 3 to Update/Delete, 4 to Report and 5 to Exit program): ", "Please enter number only", "Please enter in the menu above", 1, 5);
             try {
                 switch (choice) {
-                    case 1:
-                        listAddStudent = new ArrayList<>();
+                    case 1 -> {
                         while (true) {
-                            listAddStudent.add(controller.addStudent());
+                            Student student = controller.addStudent();
                             System.out.println("Add complete");
+                            System.out.println(student);
                             i++;
                             if (i >= 2) {
                                 String input = Validations.pressYNtoContinue("Do you want to continue adding student(Y/N): ");
@@ -32,31 +35,22 @@ public class Main {
                                 }
                             }
                         }
-                        System.out.println("Students have add: ");
-                        for (Student student : listAddStudent) {
-                            System.out.println(student);
-                        }
-                        break;
-                    case 2:
-                        System.out.println(controller.findAndSortByName());
-                        break;
-                    case 3:
-                        String uOrD = Validations.getStringByRegex("Do you want Update Or Delete: ", "U/D only!!!", "[UDud]");
+                    }
+                    case 2 -> System.out.println(controller.findAndSortByName());
+                    case 3 -> {
+                        String uOrD = Validations.getStringByRegex("Do you want Update Or Delete(U/D): ", "U/D only!!!", "[UDud]");
                         if (uOrD.toLowerCase().equals("u")) {
                             Student updateStudent = controller.updateStudent();
-                            System.out.println("Update Student successfully!");
+                            System.out.println("Update Student successfully. The Student before the update: ");
                             System.out.println(updateStudent);
                         } else {
                             Student deleteStudent = controller.removeStudent();
-                            System.out.println("Delete Student successfully!");
+                            System.out.println("Delete Student successfully. The Student have been deleted: ");
                             System.out.println(deleteStudent);
                         }
-                    case 4:
-                        System.out.println(controller.report());
-                        break;
-                    default:
-                        choice = 5;
-                        break;
+                    }
+                    case 4 -> System.out.println(controller.report());
+                    default -> choice = 5;
                 }
             } catch (Exception e) {
                 Validations.throwError(e.getMessage());

@@ -10,24 +10,24 @@ import java.util.TreeMap;
 
 public class StudentManager {
     private ArrayList<Student> listStudent;
-    private Student student;
 
     public StudentManager() {
-        listStudent = new ArrayList<Student>();
+        listStudent = new ArrayList<>();
     }
 
-    public boolean addStudent(Student s) throws Exception {
-        if (s == null) {
+
+    public boolean addStudent(Student studentAdd) throws Exception {
+        if (studentAdd == null) {
             throw new Exception("Student cannot be null");
         }
-        if (checkDuplicateCourseOnEachStudent(s.getCourseName())) {
+        if (checkDuplicateCourseOnEachStudent(studentAdd.getCourseName())) {
             throw new Exception("Duplicate course in the student you enter");
         }
-        student = getStudentById(s.getId());
-        if (student == null || checkNonDuplicateStudentInformation(s, student)) {
-            return listStudent.add(s);
+        Student studentFound = getStudentById(studentAdd.getId());
+        if (studentFound == null || checkNonDuplicateStudentInformation(studentAdd, studentFound)) {
+            return listStudent.add(studentAdd);
         }
-        throw new Exception("There has a student with this information");
+        return mergedStudent(studentAdd, studentFound);
     }
 
     private boolean checkDuplicateCourseOnEachStudent(ArrayList<CourseName> listCourse) {
@@ -41,9 +41,9 @@ public class StudentManager {
         return false;
     }
 
-    private boolean checkDuplicateCourseOnTwoStudent(ArrayList<CourseName> students1, ArrayList<CourseName> students2) {
-        for (CourseName courseNameStu1 : students1) {
-            for (CourseName courseNameStu2 : students2) {
+    private boolean checkDuplicateCourseOnTwoStudent(ArrayList<CourseName> studentAdd, ArrayList<CourseName> studentFound) {
+        for (CourseName courseNameStu1 : studentAdd) {
+            for (CourseName courseNameStu2 : studentFound) {
                 if (courseNameStu1.equals(courseNameStu2)) {
                     return true;
                 }
@@ -52,9 +52,26 @@ public class StudentManager {
         return false;
     }
 
-    private boolean checkNonDuplicateStudentInformation(Student studentAdd, Student studentCheck) {
-        if (studentAdd.getStudentName().equalsIgnoreCase(studentCheck.getStudentName())) {
-            if (!studentAdd.getSemester().equalsIgnoreCase(studentCheck.getSemester()) || (studentAdd.getSemester().equalsIgnoreCase(studentCheck.getSemester()) && !checkDuplicateCourseOnTwoStudent(studentAdd.getCourseName(), studentCheck.getCourseName()))) {
+    private boolean checkNonDuplicateStudentInformation(Student studentAdd, Student studentFound) {
+        //if not duplicate
+        if (studentAdd.getStudentName().equalsIgnoreCase(studentFound.getStudentName())) {
+            if (!studentAdd.getSemester().equalsIgnoreCase(studentFound.getSemester())) {
+                return true;
+            }
+        }
+        //else
+        return false;
+    }
+
+    private boolean mergedStudent(Student studentAdd, Student studentFound) {
+        if (studentFound.getCourseName().size() + studentAdd.getCourseName().size() > 3) {
+            return false;
+        }
+        if (studentAdd.getStudentName().equalsIgnoreCase(studentFound.getStudentName())) {
+            if ((studentAdd.getSemester().equalsIgnoreCase(studentFound.getSemester()) && !checkDuplicateCourseOnTwoStudent(studentAdd.getCourseName(), studentFound.getCourseName()))) {
+                for (CourseName course : studentAdd.getCourseName()) {
+                    studentFound.setCourseName(course);
+                }
                 return true;
             }
         }
@@ -72,16 +89,21 @@ public class StudentManager {
         return -1;
     }
 
-    public Student updateStudent(String id, Student s) throws Exception {
-        if (s == null) {
+    public Student updateStudent(Student studentUpdate) throws Exception {
+        if (studentUpdate == null) {
             throw new Exception("Student cannot be null");
         }
-        int index = searchById(id);
-        if (index != -1) {
-            return listStudent.set(index, s);
+        // Validate student update data
+        if (checkDuplicateCourseOnEachStudent(studentUpdate.getCourseName())) {
+            throw new Exception("Duplicate course in the student you update");
         }
-        throw new Exception("Student doesn't exist to update");
+        Student studentFound = getStudentById(studentUpdate.getId());
+        if (studentFound != null) {
+            return listStudent.set(searchById(studentFound.getId()), studentUpdate);
+        }
+        throw new Exception("Update fail duo to Duplicate information or Student not found");
     }
+
 
     public Student getStudentById(String id) {
         int index = searchById(id);
@@ -100,7 +122,7 @@ public class StudentManager {
     }
 
     public ArrayList<Student> findAndSortByName(String name) {
-        ArrayList<Student> newList = new ArrayList<Student>();
+        ArrayList<Student> newList = new ArrayList<>();
         for (Student student : listStudent) {
             //check student have name contains input
             if (student.getStudentName().toLowerCase().contains(name.toLowerCase())) {
@@ -108,7 +130,7 @@ public class StudentManager {
             }
         }
         if (!newList.isEmpty()) {
-            newList.sort(new Comparator<Student>() {
+            newList.sort(new Comparator<>() {
                 @Override
                 public int compare(Student s1, Student s2) {
 
@@ -119,7 +141,7 @@ public class StudentManager {
         return newList;
     }
 
-    public TreeMap<String, StudentReport> reportList() {
+    public TreeMap<String, StudentReport> getReportList() {
         TreeMap<String, StudentReport> result = new TreeMap<>();
         for (Student student : listStudent) {
             ArrayList<CourseName> courseNames = student.getCourseName();

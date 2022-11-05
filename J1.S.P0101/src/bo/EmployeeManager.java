@@ -3,12 +3,13 @@ package bo;
 import entity.Employee;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class EmployeeManager {
     private ArrayList<Employee> listEmployees;
 
     public EmployeeManager() {
-        listEmployees = new ArrayList<Employee>();
+        listEmployees = new ArrayList<>();
     }
 
     public boolean addEmployee(Employee employee) throws Exception {
@@ -22,7 +23,7 @@ public class EmployeeManager {
         throw new Exception("Duplicate employee information");
     }
 
-    public int searchById(int id) throws Exception {
+    public int searchById(int id) {
         int index = 0;
         for (Employee employee : listEmployees) {
             if (employee.getId() == id) {
@@ -52,8 +53,16 @@ public class EmployeeManager {
         throw new Exception("Employee doesn't exist to delete");
     }
 
-    public ArrayList<Employee> findEmployeeWithName(String name) {
-        ArrayList<Employee> foundList = new ArrayList<Employee>();
+//    public Employee getEmployeeById(int id) {
+//        int index = searchById(id);
+//        if (index != -1) {
+//            return listEmployees.get(index);
+//        }
+//        return null;
+//    }
+
+    public ArrayList<Employee> getListEmployeeByName(String name) {
+        ArrayList<Employee> foundList = new ArrayList<>();
         for (Employee employee : listEmployees) {
             if (employee.getFirstName().toLowerCase().contains(name.toLowerCase()) || employee.getLastName().toLowerCase().contains(name.toLowerCase())) {
                 foundList.add(employee);
@@ -62,7 +71,9 @@ public class EmployeeManager {
         return foundList;
     }
 
-    public ArrayList<Employee> getListEmployees() {
-        return listEmployees;
+    public ArrayList<Employee> sortBySalary() {
+        ArrayList<Employee> foundList = new ArrayList<>(listEmployees);
+        foundList.sort(Comparator.comparingInt(Employee::getSalary));
+        return foundList;
     }
 }

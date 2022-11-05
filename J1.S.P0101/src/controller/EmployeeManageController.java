@@ -6,7 +6,6 @@ import entity.Employee;
 import util.Validations;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class EmployeeManageController {
     private Employee employee;
@@ -39,31 +38,25 @@ public class EmployeeManageController {
 
     public String findEmployeeByName() {
         String name = Validations.getStringByRegex("Enter employee name that you want to find: ", "Please enter character only", "[a-zA-Z\s]+");
-        ArrayList<Employee> foundList = manager.findEmployeeWithName(name);
+        ArrayList<Employee> foundList = manager.getListEmployeeByName(name);
         if (foundList.size() == 0) {
             return "Can't find employee with this name";
         }
-        return getStringListEmployees(foundList);
+        return toStringListEmployee(foundList);
     }
 
     public String sortEmployeeBySalary() {
-        ArrayList<Employee> employeeList = manager.getListEmployees();
+        ArrayList<Employee> employeeList = manager.sortBySalary();
         if (employeeList.size() == 0) {
-            return "You haven't entered any employee";
+            return "You haven't entered any employee to sort";
         }
-        employeeList.sort(new Comparator<Employee>() {
-            @Override
-            public int compare(Employee o1, Employee o2) {
-                return o1.getSalary() - o2.getSalary();
-            }
-        });
-        return getStringListEmployees(employeeList);
+        return toStringListEmployee(employeeList);
     }
 
-    private String getStringListEmployees(ArrayList<Employee> employeeList) {
+    private String toStringListEmployee(ArrayList<Employee> employeeList) {
         StringBuilder ret = new StringBuilder();
         for (Employee emp : employeeList) {
-            ret.append(emp.toString());
+            ret.append(emp);
         }
         return ret.toString();
     }

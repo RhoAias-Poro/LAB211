@@ -110,7 +110,7 @@ public class Employee {
     }
 
     public String toString() {
-        String FORMAT_OUTPUT = "%-3d | %-10s | %-5s | %-10s | %-20s | %-20s | %-10s | %-6s | %-6d | %-10s";
+        String FORMAT_OUTPUT = "%-3d | %-10s | %-5s | %-10s | %-20s | %-20s | %-10s | %-6s | %-6d | %-10s \n";
         return String.format(FORMAT_OUTPUT, getId(), getFirstName(), getLastName(), getPhone(), getEmail(), getAddress(), getDob(), getSex(), getSalary(), getAgency());
     }
 

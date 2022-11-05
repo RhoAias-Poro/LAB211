@@ -6,7 +6,13 @@ import utils.utils.Validations;
 public class Main {
     public static void main(String[] args) throws Exception {
         BaseConverterController controller = new BaseConverterController();
-        String menu = "Welcome to base converter\n" + "1. Binary\n" + "2. Decimal\n" + "3. Hexadecimal\n" + "4. Exit\n";
+        String menu = """
+                Welcome to base converter
+                1. Binary
+                2. Decimal
+                3. Hexadecimal
+                4. Exit
+                """;
         while (true) {
             System.out.println(menu);
             int convertType = Validations.getInt("Please enter a option: ", "Please enter number format", "Enter option in above", 1, 4);

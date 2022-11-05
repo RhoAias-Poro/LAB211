@@ -24,11 +24,11 @@ public class StudentManagerController {
         if (studentManager.addStudent(student)) {
             return student;
         }
-        throw new Exception("Can't add student");
+        throw new Exception("Can't add student duo to duplicate information or add error");
     }
 
     public String findAndSortByName() {
-        String name = Validations.getStringByRegex("Please enter a name you want to search: ", "Please enter character only", "[a-zA-Z\s]");
+        String name = Validations.getStringByRegex("Please enter a name you want to search: ", "Please enter character only", "[a-zA-Z\s]+");
         ArrayList<Student> foundList = studentManager.findAndSortByName(name);
         if (foundList.size() == 0) {
             return "Can't find student with this name";
@@ -41,9 +41,8 @@ public class StudentManagerController {
     }
 
     public Student updateStudent() throws Exception {
-        String id = Validations.getStringByRegex("Enter Student ID that you want to manipulate: ", "Please enter valid character", "[a-zA-Z0-9]+");
         student = studentsInputer.inputInformation();
-        return studentManager.updateStudent(id, student);
+        return studentManager.updateStudent(student);
     }
 
     public Student removeStudent() throws Exception {
@@ -53,7 +52,7 @@ public class StudentManagerController {
 
     public String report() {
         StringBuilder ret = new StringBuilder();
-        TreeMap<String, StudentReport> m = studentManager.reportList();
+        TreeMap<String, StudentReport> m = studentManager.getReportList();
         if (m.size() == 0) {
             return "Can't find any students to report";
         }

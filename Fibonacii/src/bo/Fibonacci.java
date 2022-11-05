@@ -2,10 +2,11 @@ package bo;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Fibonacci {
 
-    private static ArrayList<BigInteger> array = new ArrayList<BigInteger>();
+    private static ArrayList<BigInteger> array = new ArrayList<>();
 
     public Fibonacci() {
         if (!array.contains(BigInteger.ONE)) {
@@ -24,14 +25,11 @@ public class Fibonacci {
         return fibValue;
     }
 
-    public BigInteger[] getNFiboNum(int num) throws Exception {
+    public List<BigInteger> getNFiboNum(int num) throws Exception {
         if (num <= 0) {
             throw new Exception("Please Enter Positive Integer");
         }
-        BigInteger[] arrayFib = new BigInteger[num];
-        for (int i = 0; i < num; i++) {
-            arrayFib[i] = getFibByIndex(i);
-        }
-        return arrayFib;
+        getFibByIndex(num);
+        return array.subList(0, num);
     }
 }

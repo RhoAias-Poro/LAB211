@@ -1,6 +1,7 @@
 package utils;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Random;
 
 public class ArrayUtils {
@@ -37,7 +38,7 @@ public class ArrayUtils {
         return ret;
     }
 
-    public static void printArrayOfBigInteger(BigInteger[] array) {
+    public static void printArrayOfBigInteger(List<BigInteger> array) {
         for (BigInteger value : array) {
             System.out.print(value + " ");
         }
